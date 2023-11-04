@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    tools:context=".RegisterActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_centerHorizontal="true"
+    android:layout_marginStart="30dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginEnd="30dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginBottom="30dp">
+
+        <ImageView
+            android:layout_width="147dp"
+            android:layout_height="107dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Create an account"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your personal information!"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="USER NAME"
+            android:textSize="12sp"
+            android:textColor="#E92C0C"
+            android:layout_marginTop="25dp" />
+
+        <EditText
+            android:id="@+id/edt_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ENTER YOUR USERNAME"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edtdesign" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="EMAIL"
+            android:textSize="12sp"
+            android:textColor="#E92C0C"
+            android:layout_marginTop="25dp" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edtdesign"
+            android:hint="Enter your email"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="password1"
+            android:textSize="12sp"
+            android:textColor="#E92C0C"
+            android:layout_marginTop="25dp" />
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="passwordhint1"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edtdesign"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Confirm password"
+            android:textSize="12sp"
+            android:textColor="#E92C0C"
+            android:layout_marginTop="25dp" />
+
+        <EditText
+            android:id="@+id/edt_rePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter confirm password"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edtdesign"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:text="register"
+            android:textAllCaps="false"
+            android:background="@drawable/btndesign"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="-40dp"
+            android:layout_marginStart="180dp"
+            android:background="@drawable/btndesign"
+            android:text="Back"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="--------------- OR WITH ---------------"
+            android:layout_marginLeft="100dp"
+            android:textSize="12sp"
+            android:textColor="#E92C0C"
+            android:layout_marginTop="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Don't have an Account? Register"
+            android:layout_marginTop="15dp" />
+</LinearLayout>
