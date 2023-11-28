@@ -1,0 +1,36 @@
+package com.example.airscan;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import com.example.airscan.Interfaces.APIInterface;
+import com.example.airscan.Models.ResetPasswordTask;
+import com.example.airscan.Others.APIClient;
+
+public class EnterUsrIDActivity extends AppCompatActivity {
+
+    APIInterface apiInterface;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_enter_usr_idactivity);
+        EditText edt_userID = findViewById(R.id.edt_userID);
+        Button btn_next = findViewById(R.id.btn_next);
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String usrID = String.valueOf(edt_userID.getText());
+                String dfaultPass = "string";
+                String token = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoREkwZ2hyVlJvaE5zVy1wSXpZeDBpT2lHMzNlWjJxV21sRk4wWGE1dWkwIn0.eyJleHAiOjE3MDAxOTA5NTgsImlhdCI6MTcwMDEwNDU2MSwiYXV0aF90aW1lIjoxNzAwMTA0NTU4LCJqdGkiOiJmZDdkN2ZlNC05YjFjLTRlMmItOWJiYi1hMjhhYzA2ZDY5ZGQiLCJpc3MiOiJodHRwczovL3Vpb3QuaXh4Yy5kZXYvYXV0aC9yZWFsbXMvbWFzdGVyIiwiYXVkIjpbInN0cmluZy1yZWFsbSIsIm1hc3Rlci1yZWFsbSIsImFjY291bnQiXSwic3ViIjoiYzZjNjQzOWQtYWI5YS00OGJkLTllM2EtNGY0OTkwOGQxNmRkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib3BlbnJlbW90ZSIsInNlc3Npb25fc3RhdGUiOiIzZjZjNGI3Zi1mMzYzLTQ4YjQtODY5Yi1hYmI0ZGRhOWYyMWYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vdWlvdC5peHhjLmRldiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY3JlYXRlLXJlYWxtIiwiZGVmYXVsdC1yb2xlcy1tYXN0ZXIiLCJvZmZsaW5lX2FjY2VzcyIsImFkbWluIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJzdHJpbmctcmVhbG0iOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sIm9wZW5yZW1vdGUiOnsicm9sZXMiOlsid3JpdGU6bG9ncyIsInJlYWQiLCJ3cml0ZTphc3NldHMiLCJ3cml0ZTphZG1pbiIsInJlYWQ6bG9ncyIsInJlYWQ6bWFwIiwicmVhZDphc3NldHMiLCJ3cml0ZTp1c2VyIiwicmVhZDp1c2VycyIsIndyaXRlOnJ1bGVzIiwicmVhZDpydWxlcyIsInJlYWQ6aW5zaWdodHMiLCJ3cml0ZTphdHRyaWJ1dGVzIiwid3JpdGUiLCJ3cml0ZTppbnNpZ2h0cyIsInJlYWQ6YWRtaW4iXX0sIm1hc3Rlci1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiM2Y2YzRiN2YtZjM2My00OGI0LTg2OWItYWJiNGRkYTlmMjFmIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiU3lzdGVtIEFkbWluaXN0cmF0b3IiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiIsImdpdmVuX25hbWUiOiJTeXN0ZW0iLCJmYW1pbHlfbmFtZSI6IkFkbWluaXN0cmF0b3IifQ.HLExWLJQmgyR9Pxf0bvHnL6wQKLr6zsSEZEjPG2wSnhnkBD5ZnfXE3N9opzQ33fvGsDGHUKinp2ZG7TiB3GnetG7wUZFGnfZo37t6t7Ntk_xcN6cAvCtV3XSmMXZI3x_TYTPAc2VFlYRSv5a8XW8ke5qJdFSd9KWjCqBRVvWORYzdKoTyVxGGACpHlvEHofNzrIxppTjtMjpwMOHHRr1gj-hJ-i2e4T79_zo2iS6TKbpcrAATM_JpVgCf4hBfy4Auu7U4Trrax6w9geZVMMMsY0VUCQtbofNZij0dGsviulTY_oeJrK60srjJbjut5v1bBhaQgV1x5K5j9urRNrHGg";
+                ResetPasswordTask resetPasswordTask = new ResetPasswordTask(usrID, dfaultPass, token, EnterUsrIDActivity.this);
+                resetPasswordTask.execute();
+            }
+        });
+
+    }
+}

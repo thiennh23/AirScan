@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
     private static Retrofit retrofit = null;
-    private static String token = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoREkwZ2hyVlJvaE5zVy1wSXpZeDBpT2lHMzNlWjJxV21sRk4wWGE1dWkwIn0.eyJleHAiOjE2OTkxNjM5NjIsImlhdCI6MTY5OTA3NzU2MiwiYXV0aF90aW1lIjoxNjk5MDc3NTYyLCJqdGkiOiIzMWNlMWRmNS03NGI5LTQ4MmEtYTMxMy1lYjQxZTUyOTk2MDMiLCJpc3MiOiJodHRwczovL3Vpb3QuaXh4Yy5kZXYvYXV0aC9yZWFsbXMvbWFzdGVyIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjFmMjY3MDM4LWFkNTAtNDlhNC05ZTg4LTUzNzJlMTIxZGUxNiIsInR5cCI6IkJlYXJlciIsImF6cCI6Im9wZW5yZW1vdGUiLCJzZXNzaW9uX3N0YXRlIjoiNTFjMjIzMDgtOWYxNi00ODMzLWI3MTAtNjA1YTNlYzYyMmE3IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL3Vpb3QuaXh4Yy5kZXYiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjUxYzIyMzA4LTlmMTYtNDgzMy1iNzEwLTYwNWEzZWM2MjJhNyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoidGhpZW4iLCJlbWFpbCI6InRoaWVuQDEyMy5jb20ifQ.dVVVP-KY8mLpn_Ay6YNDFvq09k92i8aI7bDsJ-D_jQuzRaz_7vHDGy0l5KlAWo65gWoHgIZqk3sGbRAT1nS2joB5EiHpFwfq-m-vP3cFy3tpEvLS5trm_3iW6dzlX-TzqWiBDSdq9WMoUsubLb0s-YPSxuEzLqOfJ4lkZdHejZh5stEWx5pi3NbCB0KOIW_tq6gZWNr-KM-lZZe9wY7wHpV_gh-EC8bQPOMeSbJJbkp4rVZ-jBgAMZWym-P3fNrVMFu6CqBmtp9M1mCJpCEEovImypVVIedG4bfl2KR2el20qmpQFDXeXKfWs6DrHk4go6O85za7iGeMPeOQsVRoXA";
+    public static String Usertoken = "";
     private static OkHttpClient getUnsafeOkHttpClient() {
         try {
             // Create a trust manager that does not validate certificate chains
@@ -60,7 +60,7 @@ public class APIClient {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
                     Request newRequest  = chain.request().newBuilder()
-                            .addHeader("Authorization", "Bearer " + token)
+                            .addHeader("Authorization", "Bearer " + Usertoken)
                             .build();
                     return chain.proceed(newRequest);
                 }

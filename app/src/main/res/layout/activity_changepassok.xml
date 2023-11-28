@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".LoginActivity">
+    tools:context=".Changepassok">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,22 +27,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/tvLoginHi"
+            android:text="@string/enterNewPass"
             android:textSize="20dp"
             android:textStyle="bold"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/wemiss"
-            android:textSize="15dp"
-            android:textStyle="italic"
-            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/email"
+            android:text="@string/userID"
+            android:textSize="12sp"
+            android:textColor="#E92C0C"
+            android:layout_marginTop="25dp"
+            />
+        <EditText
+            android:id="@+id/edt_userID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:hint="@string/userIDhint"
+            android:drawableLeft="@drawable/user"
+            android:drawablePadding="5dp"
+            android:background="@drawable/edtdesign"
+            android:inputType="textPersonName"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="@string/username"
             android:textSize="12sp"
             android:textColor="#E92C0C"
             android:layout_marginTop="25dp"
@@ -51,37 +68,59 @@
             android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/emailhint"
             android:textSize="12sp"
+            android:hint="@string/usernameHint"
             android:layout_marginTop="5dp"
-            android:inputType="textEmailAddress"
+            android:background="@drawable/edtdesign"
+            android:inputType="textPersonName"
             android:drawableLeft="@drawable/user"
             android:drawablePadding="5dp"
-            android:background="@drawable/edtdesign"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/password"
+            android:text="@string/enterNewPass"
             android:textSize="12sp"
             android:textColor="#E92C0C"
             android:layout_marginTop="25dp"
             />
         <EditText
-            android:id="@+id/edt_password"
+            android:id="@+id/edt_newpass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edtdesign"
             android:hint="@string/passwordhint"
+            android:inputType="textPassword"
+            android:drawableLeft="@drawable/lock"
+            android:drawablePadding="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="@string/ConfirmPassword"
+            android:textSize="12sp"
+            android:textColor="#E92C0C"
+            android:layout_marginTop="25dp"
+            />
+        <EditText
+            android:id="@+id/edt_renewpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ConfirmPasswordHint"
             android:textSize="12sp"
             android:layout_marginTop="5dp"
             android:background="@drawable/edtdesign"
             android:inputType="textPassword"
             android:drawableLeft="@drawable/lock"
             android:drawablePadding="5dp"
-            android:drawableRight="@drawable/visibility_off"
-            android:longClickable="false"
             />
+
 
         <CheckBox
             android:id="@+id/showpass"
@@ -90,52 +129,13 @@
             android:text="Show password"/>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Login"
+            android:text="@string/changePass"
             android:textAllCaps="false"
             android:background="@drawable/btndesign"
-            android:layout_marginTop="20dp"
-            />
-
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/back"
-            android:textAllCaps="false"
-            android:background="@drawable/btndesign"
-            android:layout_marginTop="15dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="@string/orwith"
-            android:layout_marginLeft="100dp"
-            android:textSize="12sp"
-
-            android:textColor="#E92C0C"
-            android:layout_marginTop="25dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/donthaveaccount"
             android:layout_marginTop="5dp"
             />
-        <TextView
-            android:id="@+id/registerTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/registernow"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/link"
-            />
-
     </LinearLayout>
 </RelativeLayout>

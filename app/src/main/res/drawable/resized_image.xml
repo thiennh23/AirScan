@@ -1,0 +1,5 @@
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/uk_flag"
+    android:gravity="center"
+    android:width="50dp"
+    android:height="50dp" />

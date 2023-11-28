@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">AirScan</string>
+
+    <!-- Main activity -->
+    <string name="Login">Đăng nhập</string>
+    <string name="Register">Đăng ký</string>
+    <string name="FPass">Quên mật khẩu</string>
+    <string name="Google">Google</string>
+    <string name="Github">Github</string>
+    <string name="Facebook">Facebook</string>
+    <string name="back">Quay lại</string>
+
+    <!-- LOGIN/REGISTER -->
+    <string name="tvLoginHi">Chào mừng bạn trở lại! 👋</string>
+    <string name="wemiss">Chúc bạn có một ngày tốt lành!</string>
+    <string name="username">Tên người dùng</string>
+    <string name="usernameHint">Thien123</string>
+    <string name="emailhint">21522626@gm.uit.edu.vn</string>
+    <string name="password">Mật khẩu</string>
+    <string name="orwith">Đăng nhập nhanh với</string>
+    <string name="passwordhint">Vui lòng nhập mật khẩu của bạn</string>
+    <string name="donthaveaccount">Chưa có tài khoản? </string>
+    <string name="registernow">Đăng ký ngay</string>
+    <string name="ConfirmPassword">Xác nhận mật khẩu</string>
+    <string name="email">Địa chỉ Email</string>
+    <string name="ConfirmPasswordHint">Vui lòng nhập lại mật khẩu của bạn</string>
+    <string name="createaccount">Tạo tài khoản</string>
+    <string name="provideInfo">Vui lòng cung cấp thông tin cá nhân!</string>
+    <string name="alreadyhaveacc">Đã có tài khoản?</string>
+
+    <!-- CHANGE PASSWORD -->
+    <string name="enterNewPass">Nhập mật khẩu mới của bạn!</string>
+    <string name="userID">ID Người dùng</string>
+    <string name="userIDhint">Nhập ID người dùng của bạn</string>
+    <string name="changePass">Thay đổi mật khẩu</string>
+    <string name="verifyUserID">Xác minh ID người dùng của bạn</string>
+    <string name="verify">Xác minh</string>
+</resources>

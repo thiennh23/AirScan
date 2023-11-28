@@ -13,27 +13,27 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class LoadingScreen extends AppCompatActivity {
+public class LoadingPassChange extends AppCompatActivity {
+
     private static final int CHECK_INTERVAL_MS = 500; // Every half a second
     private static final int TIMEOUT_MS = 10000; // 10 seconds
     private WebView webview;
     private ProgressBar progress;
     private boolean hasFormSubmitted = false;
     private String username;
-    private String email;
-    private String pwd;
-    private String rePwd;
+    private String dfaultPass = "string";
+    private String newpass;
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_screen);
         progress = findViewById(R.id.loading);
-        //Get data
+
+        //get data
         username = getIntent().getStringExtra("username");
-        email = getIntent().getStringExtra("email");
-        pwd = getIntent().getStringExtra("password");
-        rePwd = getIntent().getStringExtra("rePassword");
+        newpass = getIntent().getStringExtra("newpass");
 
         //Configure webview setting
         webview = findViewById(R.id.wv_loading);
@@ -43,80 +43,86 @@ public class LoadingScreen extends AppCompatActivity {
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookies(null);
 
+
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webview.getSettings().setDomStorageEnabled(true);
+        Log.i("WebView2", "Load Loaded LoadingPassChange.java");
 
-        webview.setWebViewClient(new WebViewClient(){
+        webview.setWebViewClient(new WebViewClient()
+        {
             @Override
             public void onPageFinished(WebView view, String url) {
-                Log.i("WebView", "Page loaded: " + url);
+                Log.i("WebView2", "Base URL loaded: " + url);
                 super.onPageFinished(view, url);
 
-                //Link: https://uiot.ixxc.dev/swagger/#/
+                //Login button. Link: https://uiot.ixxc.dev/swagger/#/
                 if(url.contains("swagger")){
                     clickButtonWhenAvailable(view, ".btn.authorize.unlocked");
                 }
 
                 //Link: https://uiot.ixxc.dev/auth/realms/master/login-actions/authenticate?client_id=openremote&tab_id=2ZTjZBFXhvQ
+                //Fill the login form
                 if(url.contains("openid-connect/auth") || url.contains("login-actions/authenticate")){
-                    view.evaluateJavascript("document.querySelector('a.btn.waves-effect.waves-light').click();", null);
+                    Log.i("WebView2", "Login: " + url);
+                    String userScript = "document.getElementById('username').value = '" + username + "';";
+                    String pwdScript = "document.getElementById('password').value = '"+ dfaultPass + "';";
+                    Log.i("WebView2", username);
+                    Log.i("WebView2", dfaultPass);
+
+                    view.evaluateJavascript(userScript, null);
+                    view.evaluateJavascript(pwdScript, null);
+                    if(!hasFormSubmitted) {
+                        view.evaluateJavascript("document.querySelector('button[name=\"login\"]').click();", null);
+                        hasFormSubmitted = true;
+                    }
                 }
 
+                //Submit Form, display error, ...
                 if (hasFormSubmitted) {
                     view.evaluateJavascript(
                             "(function() { \n" +
-                                    " let emailError = document.querySelector('[data-error=\"Email already exists.\"]'); \n" +
                                     " let invalidEmail = document.querySelector('[data-error=\"Invalid email address.\"]'); \n" +
                                     " let passwordError = document.querySelector('[data-error=\"Password confirmation doesn\\'t match.\"]'); \n" +
                                     " let usernameError = document.querySelector('span.red-text');\n" +
-                                    " if (emailError) return 'emailError';\n" +
-                                    " else if (invalidEmail) return 'invalidEmail';\n" +
                                     " else if (usernameError) return 'usernameError';\n" +
                                     " else if (passwordError) return 'passwordError';\n" +
                                     " else return null\n" +
                                     " })();",
                             value -> {
-                                Log.i("WebView", "hasFormSubmitted: " + url);
+                                Log.i("WebView2", "hasFormSubmitted: " + url);
                                 if (value != null && !value.equals("null")){
                                     switch (value){
-                                        case "\"emailError\"":
-                                            Toast.makeText(LoadingScreen.this, "Email already exists", Toast.LENGTH_SHORT).show();
-                                            break;
                                         case "\"invalidEmail\"":
-                                            Toast.makeText(LoadingScreen.this, "Invalid email address", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        case "\"usernameError\"":
-                                            Toast.makeText(LoadingScreen.this, "Username already exists", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoadingPassChange.this, "Invalid email address", Toast.LENGTH_SHORT).show();
                                             break;
                                         case "\"passwordError\"":
-                                            Toast.makeText(LoadingScreen.this, "Password confirmation doesn't match", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoadingPassChange.this, "Password confirmation doesn't match", Toast.LENGTH_SHORT).show();
                                             break;
                                     }
                                 } else {
-                                    Toast.makeText(LoadingScreen.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LoadingScreen.this, MainActivity.class);
-                                    startActivity(intent);
+                                    /*Toast.makeText(LoadingPassChange.this, "Login Form OK!", Toast.LENGTH_SHORT).show();*/
+                                    Log.i("WebView2", "Submit Login form ok. Now turn into Change password form!");
                                 }
-                                finish();
+                                //
                             });
                 }
 
-                if(url.contains("login-actions/registration")){
-                    Log.i("Webview", "Register: " + url);
-                    String userScript = "document.getElementById('username').value = '" + username + "';";
-                    String emailScript = "document.getElementById('email').value = '" + email + "';";
-                    String pwdScript = "document.getElementById('password').value = '"+ pwd + "';";
-                    String rePwdScript = "document.getElementById('password-confirm').value = '" + rePwd + "';";
+                //Fill the update password form
+                if(url.contains("login-actions/required-action")){
+                    Log.i("WebView2", "Loaded ENTER NEW PASSWORD form: " + url);
+                    String newPassScript = "document.getElementById('password-new').value = '" + newpass + "';";
+                    String reNewPassScript = "document.getElementById('password-confirm').value = '"+ newpass + "';";
+                    Log.i("WebView2", newpass);
+                    view.evaluateJavascript(newPassScript, null);
+                    view.evaluateJavascript(reNewPassScript, null);
+                    view.evaluateJavascript("document.querySelector('button[type=\\\"submit\\\"]').click();", null);
+                    Toast.makeText(LoadingPassChange.this, "Password changed successfully!", Toast.LENGTH_SHORT).show();
 
-                    view.evaluateJavascript(userScript, null);
-                    view.evaluateJavascript(emailScript, null);
-                    view.evaluateJavascript(pwdScript, null);
-                    view.evaluateJavascript(rePwdScript, null);
-                    if(!hasFormSubmitted) {
-                        view.evaluateJavascript("document.querySelector('button[name=\"register\"]').click();", null);
-                        hasFormSubmitted = true;
-                    }
+                    //Make changes done -> go to main to Login again
+                    Intent intent = new Intent(LoadingPassChange.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();  //Stop Activity
                 }
             }
         });
@@ -147,4 +153,5 @@ public class LoadingScreen extends AppCompatActivity {
         // Start the checking
         new Handler().postDelayed(checkInitialButtonExistence , CHECK_INTERVAL_MS);
     }
+
 }

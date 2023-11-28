@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "336775186386",
+    "project_id": "airscan-app",
+    "storage_bucket": "airscan-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336775186386:android:65c710dda0157ce192aa0b",
+        "android_client_info": {
+          "package_name": "com.example.airscan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLzfISeKXgTSJHN8iq1t3acCEAabaSJhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

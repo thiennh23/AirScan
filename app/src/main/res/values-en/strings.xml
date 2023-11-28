@@ -36,6 +36,4 @@
     <string name="changePass">Change password</string>
     <string name="verifyUserID">Verify your userID</string>
     <string name="verify">Verify</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
