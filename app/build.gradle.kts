@@ -51,11 +51,6 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation ("me.relex:circleindicator:2.1.6")
 
-    // Import the Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
-    // TODO: Add the dependencies for Firebase products you want to use
-    // When using the BoM, don't specify versions in Firebase dependencies
-    implementation("com.google.firebase:firebase-analytics")
-    // Add the dependencies for any other desired Firebase products
-    // https://firebase.google.com/docs/android/setup#available-libraries
+    // Import the Library for Animated Bottom Navigation (https://github.com/Droppers/AnimatedBottomBar)
+    implementation ("nl.joery.animatedbottombar:library:1.1.0")
 }
