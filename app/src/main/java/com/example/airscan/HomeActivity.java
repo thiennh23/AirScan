@@ -3,6 +3,7 @@ package com.example.airscan;
 import static com.example.airscan.Others.APIClient.Usertoken;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,9 +16,11 @@ import android.widget.TextView;
 import com.example.airscan.Interfaces.APIInterface;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import nl.joery.animatedbottombar.AnimatedBottomBar;
+
 public class HomeActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
+    private AnimatedBottomBar bottomNavigationView;
     private FrameLayout frameLayout;
 
 
@@ -28,39 +31,40 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         //Bottom NAV
-        bottomNavigationView = findViewById(R.id.bottomNavView);
-        frameLayout = findViewById(R.id.FrameLayout);
+        bottomNavigationView = findViewById(R.id.bottom_bar);
+        frameLayout = findViewById(R.id.frameLayout);
+        //SETUP DEFAULT TAB/FRAGMENT
+        replace(new HomeFragment());
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        //CLICK TO THE BOTTOM NAV ITEMS
+        bottomNavigationView.setOnTabSelectListener(new AnimatedBottomBar.OnTabSelectListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemID = item.getItemId();
-                if (itemID == R.id.navHome){
-                    loadFragment(new HomeFragment(), false);
-                } else if (itemID == R.id.navSearch){
-                    loadFragment(new HomeFragment(), false);
-                } else if (itemID == R.id.navNotification){
-                    loadFragment(new HomeFragment(), false);
-                } else {//NavProfile
-                    loadFragment(new HomeFragment(), false);
+            public void onTabSelected(int i, @Nullable AnimatedBottomBar.Tab tab, int i1, @NonNull AnimatedBottomBar.Tab tab1) {
+                if (tab1.getId() == R.id.navHome){
+                    replace(new HomeFragment());
+                } else if (tab1.getId() == R.id.navMap){
+                    replace(new MapFragment());
+                } else if (tab1.getId() == R.id.navDevice){
+                    replace(new DeviceFragment());
+                } else if (tab1.getId() == R.id.navProfile){
+                    replace(new ProfileFragment());
                 }
-                return true;
+            }
+
+            @Override
+            public void onTabReselected(int i, @NonNull AnimatedBottomBar.Tab tab) {
+
             }
         });
-        loadFragment(new HomeFragment(), true);
 
-        TextView text = findViewById(R.id.text);
-        //text.setText(Usertoken);
+
+
+
     }
 
-    private void loadFragment(Fragment fragment, boolean isAppInitialized){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (isAppInitialized){
-            fragmentTransaction.add(R.id.FrameLayout, fragment);
-        } else fragmentTransaction.replace(R.id.FrameLayout, fragment);
-        fragmentTransaction.commit();
+    private void replace(Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout, fragment);
+        transaction.commit();
     }
-
 }

@@ -8,17 +8,17 @@
         android:icon="@drawable/icon_home"
         android:title="Home" />
     <item
-        android:id="@+id/navSearch"
+        android:id="@+id/navMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/icon_search"
-        android:title="Search" />
+        android:icon="@drawable/icon_map"
+        android:title="Map" />
     <item
-        android:id="@+id/navNotification"
+        android:id="@+id/navDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/icon_notification"
-        android:title="Notification" />
+        android:icon="@drawable/icon_device"
+        android:title="Device" />
     <item
         android:id="@+id/navProfile"
         android:layout_width="wrap_content"
