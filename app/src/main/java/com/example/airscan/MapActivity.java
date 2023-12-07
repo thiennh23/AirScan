@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -23,7 +24,7 @@ import com.example.airscan.Models.Asset;
 import com.example.airscan.Models.Default;
 import com.example.airscan.Models.Map;
 import com.example.airscan.Models.Options;
-import com.example.airscan.Models.attributes;
+import com.example.airscan.Models.MapAttribute;
 import com.example.airscan.Models.location;
 import com.example.airscan.Models.value;
 import com.example.airscan.Others.APIClient;
@@ -59,6 +60,17 @@ public class MapActivity extends AppCompatActivity {
         map.setTileSource(TileSourceFactory.MAPNIK);
 
         setContentView(R.layout.activity_map);
+
+        Button btntest = findViewById(R.id.BtnTest);
+        btntest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, TestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         SearchView searchView = findViewById(R.id.location);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             List<Address> addressList = null;
@@ -79,7 +91,7 @@ public class MapActivity extends AppCompatActivity {
                                     Asset asset= response.body();
                                     Gson gson = new Gson();
                                     String json = gson.toJson(asset.attributes);
-                                    attributes attrObj = gson.fromJson(json, attributes.class);
+                                    MapAttribute attrObj = gson.fromJson(json, MapAttribute.class);
                                     json = gson.toJson(attrObj.location);
                                     location locobj = gson.fromJson(json, com.example.airscan.Models.location.class);
                                     json = gson.toJson(locobj.value);
@@ -119,7 +131,7 @@ public class MapActivity extends AppCompatActivity {
                                     Asset asset= response.body();
                                     Gson gson = new Gson();
                                     String json = gson.toJson(asset.attributes);
-                                    attributes attrObj = gson.fromJson(json, attributes.class);
+                                    MapAttribute attrObj = gson.fromJson(json, MapAttribute.class);
                                     json = gson.toJson(attrObj.location);
                                     location locobj = gson.fromJson(json, location.class);
                                     json = gson.toJson(locobj.value);
@@ -362,7 +374,7 @@ public class MapActivity extends AppCompatActivity {
                     Asset asset = response.body();
                     Gson gson = new Gson();
                     String json = gson.toJson(asset.attributes);
-                    attributes attrObj = gson.fromJson(json, attributes.class);
+                    MapAttribute attrObj = gson.fromJson(json, MapAttribute.class);
                     json = gson.toJson(attrObj.location);
                     location locobj = gson.fromJson(json, location.class);
                     json = gson.toJson(locobj.value);
@@ -429,7 +441,7 @@ public class MapActivity extends AppCompatActivity {
                     Asset asset = response.body();
                     Gson gson = new Gson();
                     String json = gson.toJson(asset.attributes);
-                    attributes attrObj = gson.fromJson(json, attributes.class);
+                    MapAttribute attrObj = gson.fromJson(json, MapAttribute.class);
                     json = gson.toJson(attrObj.location);
                     location locobj = gson.fromJson(json, location.class);
                     json = gson.toJson(locobj.value);
