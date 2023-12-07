@@ -53,4 +53,8 @@ dependencies {
 
     // Import the Library for Animated Bottom Navigation (https://github.com/Droppers/AnimatedBottomBar)
     implementation ("nl.joery.animatedbottombar:library:1.1.0")
+    implementation ("org.osmdroid:osmdroid-android:6.1.17")
+    implementation ("com.makeramen:roundedimageview:2.3.0")
+
+
 }

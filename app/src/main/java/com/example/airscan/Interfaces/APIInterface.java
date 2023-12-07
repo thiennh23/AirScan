@@ -1,6 +1,7 @@
 package com.example.airscan.Interfaces;
 
 import com.example.airscan.Models.Asset;
+import com.example.airscan.Models.Map;
 import com.example.airscan.Models.Token;
 import com.google.gson.JsonObject;
 
@@ -33,4 +34,8 @@ public interface APIInterface {
     @Headers("Content-Type: application/json")
     @PUT("api/master/user/master/reset-password/{userId}")
     Call<String> updatePassword(@Path("userId") String userId, @Body JsonObject body);
+
+    //GET MAP
+    @GET("api/master/map")
+    Call<Map> getMap();
 }

@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                     Token Token = response.body();
                     Log.i("Login123", response.toString());
                     APIClient.Usertoken = Token.access_token;
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MapActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();

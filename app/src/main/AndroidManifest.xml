@@ -22,7 +22,7 @@
             android:name=".OnboardingActivity"
             android:exported="false" />
         <activity
-            android:name=".ConfirmNewPassword"
+            android:name=".MapActivity"
             android:exported="false" />
         <activity
             android:name=".LoadingPassChange"
