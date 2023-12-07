@@ -415,7 +415,7 @@ public class MapActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     Log.d("THIEN", "DONT MAP");
-                                    startActivity(new Intent(MapActivity.this, WeatherAsset.class));
+                                    startActivity(new Intent(MapActivity.this, WeatherAssetActivity.class));
                                 }
                             });
                             bottomSheetDialog.setContentView(bottomSheetView);
@@ -478,7 +478,7 @@ public class MapActivity extends AppCompatActivity {
                             bottomSheetView.findViewById(R.id.buttondetail).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MapActivity.this, HomeActivity.class));
+                                    startActivity(new Intent(MapActivity.this, LightAssetActivity.class));
                                 }
                             });
                             bottomSheetDialog.setContentView(bottomSheetView);

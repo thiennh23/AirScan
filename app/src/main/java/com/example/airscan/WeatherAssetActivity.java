@@ -1,30 +1,23 @@
 package com.example.airscan;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.airscan.Interfaces.APIInterface;
 import com.example.airscan.Models.Asset;
 import com.example.airscan.Models.WeatherData;
-import com.example.airscan.Models.attributes;
+import com.example.airscan.Models.WeatherAttributes;
 import com.example.airscan.Others.APIClient;
 import com.google.gson.Gson;
-import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WeatherAsset extends AppCompatActivity {
+public class WeatherAssetActivity extends AppCompatActivity {
     APIInterface apiInterface;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM ");
   /*  LineGraphSeries<DataPoint> series = new LineGraphSeries<>( new DataPoint[0]);
@@ -48,7 +41,7 @@ public class WeatherAsset extends AppCompatActivity {
                 Asset as = response.body();
                 Gson gson = new Gson();
                 String json = gson.toJson(as.attributes);
-                attributes attrObj = gson.fromJson(json, attributes.class);
+                WeatherAttributes attrObj = gson.fromJson(json, WeatherAttributes.class);
 
                 json = gson.toJson(attrObj.windSpeed);
                 WeatherData windsobj = gson.fromJson(json, WeatherData.class);
@@ -69,22 +62,22 @@ public class WeatherAsset extends AppCompatActivity {
                 tv2.setText(temobj.getValue().toString());
 
                 TextView tv3 = findViewById(R.id.tvweahumi1);
-                tv3.setText(humidobj.getValue().toString());
+                tv3.setText(humidobj.getValue());
                 TextView tv4= findViewById(R.id.tvweawinddi1);
-                tv4.setText(winddiobj.getValue().toString());
+                tv4.setText(winddiobj.getValue());
                 TextView tv5 = findViewById(R.id.tvweawindspeed1);
-                tv5.setText(windsobj.getValue().toString());
+                tv5.setText(windsobj.getValue());
 
                 TextView tv6 = findViewById(R.id.tvweapressnext1);
                 json = gson.toJson(attrObj.place);
                 WeatherData Place = gson.fromJson(json, WeatherData.class);
-                tv6.setText(Place.getValue().toString());
+                tv6.setText(Place.getValue());
 
 
                 TextView tv7 = findViewById(R.id.tvweamaxtempnext1);
                 json = gson.toJson(attrObj.rainfall);
                 WeatherData rainFall = gson.fromJson(json, WeatherData.class);
-                tv7.setText(rainFall.getValue().toString());
+                tv7.setText(rainFall.getValue());
 
                 TextView tv8 = findViewById(R.id.tvweamintempnext1);
                 tv8.setText("NULL");

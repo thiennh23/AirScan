@@ -9,11 +9,9 @@ import android.widget.TextView;
 import com.example.airscan.Interfaces.APIInterface;
 import com.example.airscan.Models.Asset;
 import com.example.airscan.Models.WeatherData;
-import com.example.airscan.Models.attributes;
+import com.example.airscan.Models.WeatherAttributes;
 import com.example.airscan.Others.APIClient;
 import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +32,7 @@ public class TestActivity extends AppCompatActivity {
                 Asset as = response.body();
                 Gson gson = new Gson();
                 String json = gson.toJson(as.attributes);
-                attributes attrObj = gson.fromJson(json, attributes.class);
+                WeatherAttributes attrObj = gson.fromJson(json, WeatherAttributes.class);
 
                 json = gson.toJson(attrObj.humidity);//LINE NULL
                 WeatherData humidobj = gson.fromJson(json, WeatherData.class);
