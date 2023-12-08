@@ -1,13 +1,16 @@
 package com.example.airscan;
 
+import android.database.Cursor;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.airscan.Interfaces.APIInterface;
 import com.example.airscan.Models.Asset;
+import com.example.airscan.Models.DatabaseHandler;
 import com.example.airscan.Models.WeatherData;
 import com.example.airscan.Models.WeatherAttributes;
 import com.example.airscan.Others.APIClient;
@@ -33,6 +36,27 @@ public class WeatherAssetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_asset);
+
+        DatabaseHandler database = new DatabaseHandler(this, "TEST", null, 1);
+        database.QueryData("CREATE TABLE IF NOT EXISTS TestTable(\n" +
+                "    Id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    Name TEXT,\n" +
+                "    Humidity INTEGER,\n" +
+                "    Manufacturer TEXT,\n" +
+                "    Place TEXT,\n" +
+                "    Rainfall DOUBLE,\n" +
+                "    altitude DOUBLE,\n" +
+                "    azimuth DOUBLE,\n" +
+                "    irradiance DOUBLE,\n" +
+                "    zenith DOUBLE,\n" +
+                "    Temperature DOUBLE,\n" +
+                "    UVindex DOUBLE,\n" +
+                "    WindDirection INTEGER,\n" +
+                "    WindSpeed DOUBLE\n" +
+                ");\n");
+
+
+
         apiInterface = APIClient.getClient().create(APIInterface.class);
         Call<Asset> call = apiInterface.getAsset("5zI6XqkQVSfdgOrZ1MyWEf");
         call.enqueue(new Callback<Asset>() {
@@ -87,6 +111,39 @@ public class WeatherAssetActivity extends AppCompatActivity {
 
                 TextView tv10 = findViewById(R.id.tvweagroundnext1);
                 tv10.setText("NULL");
+
+                json = gson.toJson(attrObj.manufacturer);
+                WeatherData Manufacturer = gson.fromJson(json, WeatherData.class);
+
+                json = gson.toJson(attrObj.place);
+                WeatherData place = gson.fromJson(json, WeatherData.class);
+
+                json = gson.toJson(attrObj.sunAltitude);
+                WeatherData altitude = gson.fromJson(json, WeatherData.class);
+
+                json = gson.toJson(attrObj.sunAzimuth);
+                WeatherData azimuth = gson.fromJson(json, WeatherData.class);
+
+                database.QueryData("INSERT INTO TestTable (Name, Humidity, Manufacturer, Place, Rainfall, altitude, azimuth, irradiance, zenith, Temperature, UVindex, WindDirection, WindSpeed)\n" +
+                        "VALUES ('SampleData', 50, 'Example Manufacturer', 'Sample Place', 20.5, 100.0, 180.0, 500.0, 45.0, 25.0, 7.5, 180, 10.0);\n");
+
+                Cursor dataget = database.GetData("SELECT * FROM TestTable");
+                while (dataget.moveToNext()){
+                    Log.d("THIEN", dataget.getString(0));
+                    Log.d("THIEN", dataget.getString(2));
+                    Log.d("THIEN", dataget.getString(3));
+                    Log.d("THIEN", dataget.getString(4));
+                    Log.d("THIEN", dataget.getString(5));
+                    Log.d("THIEN", dataget.getString(6));
+                    Log.d("THIEN", dataget.getString(7));
+                    Log.d("THIEN", dataget.getString(8));
+                    Log.d("THIEN", dataget.getString(9));
+                    Log.d("THIEN", dataget.getString(10));
+                    Log.d("THIEN", dataget.getString(11));
+                    Log.d("THIEN", dataget.getString(12));
+                    Log.d("THIEN", dataget.getString(13));
+                }
+
             }
 
             @Override
