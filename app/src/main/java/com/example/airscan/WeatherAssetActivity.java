@@ -38,7 +38,7 @@ public class WeatherAssetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather_asset);
 
         DatabaseHandler database = new DatabaseHandler(this, "TEST", null, 1);
-        database.QueryData("CREATE TABLE IF NOT EXISTS TestTable(\n" +
+        database.QueryData("CREATE TABLE IF NOT EXISTS Test1(\n" +
                 "    Id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    Name TEXT,\n" +
                 "    Humidity INTEGER,\n" +
@@ -123,13 +123,26 @@ public class WeatherAssetActivity extends AppCompatActivity {
 
                 json = gson.toJson(attrObj.sunAzimuth);
                 WeatherData azimuth = gson.fromJson(json, WeatherData.class);
+                json = gson.toJson(attrObj.sunZenith);
+                WeatherData zenith = gson.fromJson(json, WeatherData.class);
+                json = gson.toJson(attrObj.sunIrradiance);
+                WeatherData irradiance = gson.fromJson(json, WeatherData.class);
+                json = gson.toJson(attrObj.uVIndex);
+                WeatherData uv = gson.fromJson(json, WeatherData.class);
+                json = gson.toJson(attrObj.windSpeed);
+                WeatherData speed = gson.fromJson(json, WeatherData.class);
+                // Your modified SQL query
+                String insertQuery = "INSERT INTO Test1 (Name, Humidity, Manufacturer, Place, Rainfall, altitude, azimuth, irradiance, zenith, Temperature, UVindex, WindDirection, WindSpeed) " +
+                        "VALUES ('" + as.name + "', " + humidobj.getValue() + ", '" + Manufacturer.getValue() + "', '" + place.getValue() + "', " + rainFall.getValue() + ", 2, 5, 2, 6, "+temobj.getValue()+", 0, 0, "+speed.getValue()+");";
 
-                database.QueryData("INSERT INTO TestTable (Name, Humidity, Manufacturer, Place, Rainfall, altitude, azimuth, irradiance, zenith, Temperature, UVindex, WindDirection, WindSpeed)\n" +
-                        "VALUES ('SampleData', 50, 'Example Manufacturer', 'Sample Place', 20.5, 100.0, 180.0, 500.0, 45.0, 25.0, 7.5, 180, 10.0);\n");
 
-                Cursor dataget = database.GetData("SELECT * FROM TestTable");
+
+                database.QueryData(insertQuery);
+
+                Cursor dataget = database.GetData("SELECT * FROM Test1");
                 while (dataget.moveToNext()){
                     Log.d("THIEN", dataget.getString(0));
+                    Log.d("THIEN", dataget.getString(1));
                     Log.d("THIEN", dataget.getString(2));
                     Log.d("THIEN", dataget.getString(3));
                     Log.d("THIEN", dataget.getString(4));
