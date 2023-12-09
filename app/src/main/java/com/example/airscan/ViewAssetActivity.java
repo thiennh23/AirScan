@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.airscan.Interfaces.APIInterface;
 import com.example.airscan.Models.Asset;
+import com.example.airscan.Models.DatabaseHandler;
 import com.example.airscan.Models.LightAttributes;
 import com.example.airscan.Models.LightData;
 import com.example.airscan.Models.ViewAsset;
@@ -31,11 +32,40 @@ public class ViewAssetActivity extends AppCompatActivity {
     private RecyclerView mRecyclerHero;
     private ViewAssetAdapter mAssetAdapter ;
     APIInterface apiInterface;
+    DatabaseHandler database = new DatabaseHandler(this, "TESTDATA", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_asset);
+
+        //FOR LIGHT ASSET
+        database.QueryData("CREATE TABLE IF NOT EXISTS Test2 (\n" +
+                "    Id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    brightness INTEGER,\n" +
+                "    colourTemperature INTEGER,\n" +
+                "    onOff INTEGER,\n" +
+                "    colourRGB TEXT\n" +
+                ");");
+
+        //FOR WEATHER ASSET
+        database.QueryData("CREATE TABLE IF NOT EXISTS Test3(\n" +
+                "    Id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    Name TEXT,\n" +
+                "    Humidity DOUBLE,\n" +
+                "    Manufacturer TEXT,\n" +
+                "    Place TEXT,\n" +
+                "    Rainfall DOUBLE,\n" +
+                "    altitude DOUBLE,\n" +
+                "    azimuth DOUBLE,\n" +
+                "    irradiance DOUBLE,\n" +
+                "    zenith DOUBLE,\n" +
+                "    Temperature DOUBLE,\n" +
+                "    UVindex DOUBLE,\n" +
+                "    WindDirection DOUBLE,\n" +
+                "    WindSpeed DOUBLE\n" +
+                ")");
+
 
         //Receive data (ASSET ID ON THE MARKER)
         Intent intent = getIntent();
@@ -92,6 +122,7 @@ public class ViewAssetActivity extends AppCompatActivity {
                 WeatherData humidity = gson.fromJson(json, WeatherData.class);
                 mAssets.add(new ViewAsset("HUMIDITY (%)", CheckNull(humidity.getValue()),R.drawable.humidity));
 
+
                 //RAINFALL
                 json = gson.toJson(attrObj.rainfall);
                 WeatherData rainfall = gson.fromJson(json, WeatherData.class);
@@ -138,6 +169,55 @@ public class ViewAssetActivity extends AppCompatActivity {
 
                 //LOAD TO RECYCLER VIEW
                 RecyclerViewAsset();
+
+                //LOAD INTO DATABASE
+                double humidityValue = checkNullDouble(humidity.getValue());
+                double rainfallValue = checkNullDouble(rainfall.getValue());
+                double altitudeValue = checkNullDouble(sunAltitude.getValue());
+                double azimuthValue = checkNullDouble(sunAzimuth.getValue());
+                double irradianceValue = checkNullDouble(sunIrradiance.getValue());
+                double zenithValue = checkNullDouble(sunZenith.getValue());
+                double temperatureValue = checkNullDouble(tempurature.getValue());
+                double uvIndexValue = checkNullDouble(uVIndex.getValue());
+                double windDirectionValue = checkNullDouble(windDirection.getValue());
+                double windSpeedValue = checkNullDouble(windSpeed.getValue());
+
+
+
+                String insertSql = "INSERT INTO Test3 (Name, Humidity, Manufacturer, Place, Rainfall, altitude, azimuth, irradiance, zenith, Temperature, UVindex, WindDirection, WindSpeed) VALUES (" +
+                        "'" + as.name + "', " +
+                        humidityValue + ", " +
+                        "'" + CheckNull(manufacturer.getValue()) + "', " +
+                        "'" + CheckNull(place.getValue()) + "', " +
+                        rainfallValue + ", " +
+                        altitudeValue + ", " +
+                        azimuthValue + ", " +
+                        irradianceValue + ", " +
+                        zenithValue + ", " +
+                        temperatureValue + ", " +
+                        uvIndexValue + ", " +
+                        windDirectionValue + ", " +
+                        windSpeedValue + ")";
+                database.QueryData(insertSql);
+
+                Cursor dataget = database.GetData("SELECT * FROM Test3");
+                while (dataget.moveToNext()){
+                    Log.d("THIEN", dataget.getString(0));
+                    Log.d("THIEN", dataget.getString(1));
+                    Log.d("THIEN", dataget.getString(2));
+                    Log.d("THIEN", dataget.getString(3));
+                    Log.d("THIEN", dataget.getString(4));
+                    Log.d("THIEN", dataget.getString(5));
+                    Log.d("THIEN", dataget.getString(6));
+                    Log.d("THIEN", dataget.getString(7));
+                    Log.d("THIEN", dataget.getString(8));
+                    Log.d("THIEN", dataget.getString(9));
+                    Log.d("THIEN", dataget.getString(10));
+                    Log.d("THIEN", dataget.getString(11));
+                    Log.d("THIEN", dataget.getString(12));
+                    Log.d("THIEN", dataget.getString(13));
+                }
+
             }
 
             @Override
@@ -192,6 +272,31 @@ public class ViewAssetActivity extends AppCompatActivity {
 
                 //LOAD TO RECYCLER VIEW
                 RecyclerViewAsset();
+
+
+                //LOAD INTO DATABASE
+                double bright = Double.parseDouble(CheckNull(brightness.getValue()));
+                double clTemp = Double.parseDouble(CheckNull(colourTemperature.getValue()));
+                int ONOFF = checkOnOff(CheckNull(onOff.getValue()));
+                //Log.d("THIEN", String.format("%1$.2f", bright));
+
+                // Your modified SQL query
+                String insertQuery = "INSERT INTO Test2 (brightness, colourTemperature, onOff, colourRGB) VALUES (" +
+                        bright + ", " +
+                        clTemp + ", '" +
+                        ONOFF + "', '" +
+                        CheckNull(colourRGB.getValue()) + "')";
+
+                database.QueryData(insertQuery);
+
+                Cursor dataget = database.GetData("SELECT * FROM Test2");
+                while (dataget.moveToNext()){
+                    Log.d("THIEN", dataget.getString(0));
+                    Log.d("THIEN", dataget.getString(1));
+                    Log.d("THIEN", dataget.getString(2));
+                    Log.d("THIEN", dataget.getString(3));
+                    Log.d("THIEN", dataget.getString(4));
+                }
             }
 
             @Override
@@ -209,7 +314,32 @@ public class ViewAssetActivity extends AppCompatActivity {
 
     String CheckNull(String string){
         if (string == null)
-            return "NO DATA";
+            return "NULL";
         else return string;
     }
+
+    //Check on off of the light asset
+    int checkOnOff(String onOff){
+        if (onOff.equals("true"))
+            return 1;
+        else return 0;
+    }
+
+    double checkNullDouble(String str) {
+        if (str != null) {
+            // Check if the string is not empty after trimming
+            String trimmedStr = str.trim();
+            if (!trimmedStr.isEmpty()) {
+                try {
+                    return Double.parseDouble(trimmedStr);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace(); // Handle the exception appropriately
+                }
+            }
+        }
+        return 0; // Return a default value or handle the error case
+    }
+
+
+
 }
