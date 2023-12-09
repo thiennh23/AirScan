@@ -334,8 +334,6 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 apiInterface = APIClient.getClient().create(APIInterface.class);
-//        NavigationView nv = findViewById(R.id.navi);
-//        nv.setNavigationItemSelectedListener(this);
                 Call<Map> mapCall = apiInterface.getMap();
                 mapCall.enqueue(new Callback<Map>() {
                     @Override
@@ -358,6 +356,38 @@ public class MapActivity extends AppCompatActivity {
                         mapController.setZoom(18);
                     }
 
+                    @Override
+                    public void onFailure(Call<Map> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+            }
+        });
+
+        ///LOCATE THE MARKER BUT NOT ZOOM IN
+        ImageView img5 = (ImageView) findViewById(R.id.btn_location);
+        img5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<Map> mapCall = apiInterface.getMap();
+                mapCall.enqueue(new Callback<Map>() {
+                    @Override
+                    public void onResponse(Call<Map> call, Response<Map> response) {
+                        Map map = response.body();
+                        Gson gson = new Gson();
+                        String json = gson.toJson(map.options);
+                        Options optionsObj = gson.fromJson(json, Options.class);
+                        json = gson.toJson(optionsObj._default);
+                        Default defaultObj = gson.fromJson(json, Default.class);
+                        Double zoom = defaultObj.zoom;
+                        Float longitude = defaultObj.center[0];
+                        Float latitude = defaultObj.center[1];
+                        mapView = findViewById(R.id.Map);
+                        mapController = mapView.getController();
+                        GeoPoint startPoint = new GeoPoint(latitude, longitude);
+                        mapView.getController().animateTo(startPoint);
+                        mapController.setCenter(startPoint);
+                    }
                     @Override
                     public void onFailure(Call<Map> call, Throwable t) {
                         t.printStackTrace();
