@@ -65,7 +65,7 @@ public class MapActivity extends AppCompatActivity {
         btntest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, TestActivity.class);
+                Intent intent = new Intent(MapActivity.this, ViewAssetActivity.class);
                 startActivity(intent);
             }
         });
@@ -414,7 +414,9 @@ public class MapActivity extends AppCompatActivity {
                             bottomSheetView.findViewById(R.id.buttondetail).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MapActivity.this, WeatherAssetActivity.class));
+                                    Intent intent = new  Intent(MapActivity.this, ViewAssetActivity.class);
+                                    intent.putExtra("ASSET_ID", "5zI6XqkQVSfdgOrZ1MyWEf");  // PUT THE ID ASSET
+                                    startActivity(intent);
                                 }
                             });
                             bottomSheetDialog.setContentView(bottomSheetView);
@@ -477,7 +479,9 @@ public class MapActivity extends AppCompatActivity {
                             bottomSheetView.findViewById(R.id.buttondetail).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MapActivity.this, LightAssetActivity.class));
+                                    Intent intent = new  Intent(MapActivity.this, ViewAssetActivity.class);
+                                    intent.putExtra("ASSET_ID", "6iWtSbgqMQsVq8RPkJJ9vo");  // PUT THE ID ASSET
+                                    startActivity(intent);
                                 }
                             });
                             bottomSheetDialog.setContentView(bottomSheetView);

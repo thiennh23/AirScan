@@ -1,5 +1,6 @@
 package com.example.airscan;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//DUNG DE TEST DATABASE VOI GRAPH THOI
 public class WeatherAssetActivity extends AppCompatActivity {
     APIInterface apiInterface;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM ");
@@ -36,6 +38,8 @@ public class WeatherAssetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_asset);
+
+
 
         DatabaseHandler database = new DatabaseHandler(this, "TEST", null, 1);
         database.QueryData("CREATE TABLE IF NOT EXISTS Test1(\n" +
