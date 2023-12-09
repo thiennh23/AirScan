@@ -55,6 +55,7 @@ dependencies {
     implementation ("nl.joery.animatedbottombar:library:1.1.0")
     implementation ("org.osmdroid:osmdroid-android:6.1.17")
     implementation ("com.makeramen:roundedimageview:2.3.0")
+    implementation ("com.jjoe64:graphview:4.2.2")
 
 
 }
