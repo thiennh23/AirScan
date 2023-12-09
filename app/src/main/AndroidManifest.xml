@@ -19,10 +19,22 @@
         android:theme="@style/Theme.AirScan"
         tools:targetApi="31">
         <activity
+            android:name=".ViewAssetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LightAssetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WeatherAssetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TestActivity"
+            android:exported="false" />
+        <activity
             android:name=".OnboardingActivity"
             android:exported="false" />
         <activity
-            android:name=".ConfirmNewPassword"
+            android:name=".MapActivity"
             android:exported="false" />
         <activity
             android:name=".LoadingPassChange"

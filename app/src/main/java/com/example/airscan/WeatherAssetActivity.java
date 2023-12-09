@@ -1,0 +1,603 @@
+package com.example.airscan;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.icu.text.SimpleDateFormat;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.airscan.Interfaces.APIInterface;
+import com.example.airscan.Models.Asset;
+import com.example.airscan.Models.DatabaseHandler;
+import com.example.airscan.Models.WeatherData;
+import com.example.airscan.Models.WeatherAttributes;
+import com.example.airscan.Others.APIClient;
+import com.google.gson.Gson;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+//DUNG DE TEST DATABASE VOI GRAPH THOI
+public class WeatherAssetActivity extends AppCompatActivity {
+    APIInterface apiInterface;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM ");
+  /*  LineGraphSeries<DataPoint> series = new LineGraphSeries<>( new DataPoint[0]);
+    LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>(new DataPoint[0]);
+    LineGraphSeries<DataPoint> series3 = new LineGraphSeries<>(new DataPoint[0]);
+
+    GraphDatabaseHelper graphDatabaseHelper;
+    SQLiteDatabase sqLiteDatabase;
+    DataGraph dataGraph;
+    DataGraphAdapter dataGraphAdapter;
+    GraphActivity graphActivity;*/
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_weather_asset);
+
+
+
+        DatabaseHandler database = new DatabaseHandler(this, "TEST", null, 1);
+        database.QueryData("CREATE TABLE IF NOT EXISTS Test1(\n" +
+                "    Id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    Name TEXT,\n" +
+                "    Humidity INTEGER,\n" +
+                "    Manufacturer TEXT,\n" +
+                "    Place TEXT,\n" +
+                "    Rainfall DOUBLE,\n" +
+                "    altitude DOUBLE,\n" +
+                "    azimuth DOUBLE,\n" +
+                "    irradiance DOUBLE,\n" +
+                "    zenith DOUBLE,\n" +
+                "    Temperature DOUBLE,\n" +
+                "    UVindex DOUBLE,\n" +
+                "    WindDirection INTEGER,\n" +
+                "    WindSpeed DOUBLE\n" +
+                ");\n");
+
+
+
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<Asset> call = apiInterface.getAsset("5zI6XqkQVSfdgOrZ1MyWEf");
+        call.enqueue(new Callback<Asset>() {
+            @Override
+            public void onResponse(Call<Asset> call, Response<Asset> response) {
+                Asset as = response.body();
+                Gson gson = new Gson();
+                String json = gson.toJson(as.attributes);
+                WeatherAttributes attrObj = gson.fromJson(json, WeatherAttributes.class);
+
+                json = gson.toJson(attrObj.windSpeed);
+                WeatherData windsobj = gson.fromJson(json, WeatherData.class);
+
+                json = gson.toJson(attrObj.temperature);
+                WeatherData temobj = gson.fromJson(json, WeatherData.class);
+
+                json = gson.toJson(attrObj.humidity);
+                WeatherData humidobj = gson.fromJson(json, WeatherData.class);
+
+                json = gson.toJson(attrObj.windDirection);
+                WeatherData winddiobj = gson.fromJson(json, WeatherData.class);
+
+                TextView tv = findViewById(R.id.tvweaid1);
+                tv.setText(as.id.toString());
+
+                TextView tv2 = findViewById(R.id.tvweatemper1);
+                tv2.setText(temobj.getValue().toString());
+
+                TextView tv3 = findViewById(R.id.tvweahumi1);
+                tv3.setText(humidobj.getValue());
+                TextView tv4= findViewById(R.id.tvweawinddi1);
+                tv4.setText(winddiobj.getValue());
+                TextView tv5 = findViewById(R.id.tvweawindspeed1);
+                tv5.setText(windsobj.getValue());
+
+                TextView tv6 = findViewById(R.id.tvweapressnext1);
+                json = gson.toJson(attrObj.place);
+                WeatherData Place = gson.fromJson(json, WeatherData.class);
+                tv6.setText(Place.getValue());
+
+
+                TextView tv7 = findViewById(R.id.tvweamaxtempnext1);
+                json = gson.toJson(attrObj.rainfall);
+                WeatherData rainFall = gson.fromJson(json, WeatherData.class);
+                tv7.setText(rainFall.getValue());
+
+                TextView tv8 = findViewById(R.id.tvweamintempnext1);
+                tv8.setText("NULL");
+
+                TextView tv9 = findViewById(R.id.tvweaseanext1);
+                tv9.setText("NULL");
+
+                TextView tv10 = findViewById(R.id.tvweagroundnext1);
+                tv10.setText("NULL");
+
+                json = gson.toJson(attrObj.manufacturer);
+                WeatherData Manufacturer = gson.fromJson(json, WeatherData.class);
+
+                json = gson.toJson(attrObj.place);
+                WeatherData place = gson.fromJson(json, WeatherData.class);
+
+                json = gson.toJson(attrObj.sunAltitude);
+                WeatherData altitude = gson.fromJson(json, WeatherData.class);
+
+                json = gson.toJson(attrObj.sunAzimuth);
+                WeatherData azimuth = gson.fromJson(json, WeatherData.class);
+                json = gson.toJson(attrObj.sunZenith);
+                WeatherData zenith = gson.fromJson(json, WeatherData.class);
+                json = gson.toJson(attrObj.sunIrradiance);
+                WeatherData irradiance = gson.fromJson(json, WeatherData.class);
+                json = gson.toJson(attrObj.uVIndex);
+                WeatherData uv = gson.fromJson(json, WeatherData.class);
+                json = gson.toJson(attrObj.windSpeed);
+                WeatherData speed = gson.fromJson(json, WeatherData.class);
+                // Your modified SQL query
+                String insertQuery = "INSERT INTO Test1 (Name, Humidity, Manufacturer, Place, Rainfall, altitude, azimuth, irradiance, zenith, Temperature, UVindex, WindDirection, WindSpeed) " +
+                        "VALUES ('" + as.name + "', " + humidobj.getValue() + ", '" + Manufacturer.getValue() + "', '" + place.getValue() + "', " + rainFall.getValue() + ", 2, 5, 2, 6, "+temobj.getValue()+", 0, 0, "+speed.getValue()+");";
+
+
+
+                database.QueryData(insertQuery);
+
+                Cursor dataget = database.GetData("SELECT * FROM Test1");
+                while (dataget.moveToNext()){
+                    Log.d("THIEN", dataget.getString(0));
+                    Log.d("THIEN", dataget.getString(1));
+                    Log.d("THIEN", dataget.getString(2));
+                    Log.d("THIEN", dataget.getString(3));
+                    Log.d("THIEN", dataget.getString(4));
+                    Log.d("THIEN", dataget.getString(5));
+                    Log.d("THIEN", dataget.getString(6));
+                    Log.d("THIEN", dataget.getString(7));
+                    Log.d("THIEN", dataget.getString(8));
+                    Log.d("THIEN", dataget.getString(9));
+                    Log.d("THIEN", dataget.getString(10));
+                    Log.d("THIEN", dataget.getString(11));
+                    Log.d("THIEN", dataget.getString(12));
+                    Log.d("THIEN", dataget.getString(13));
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Asset> call, Throwable t) {
+
+            }
+        });
+        /*RelativeLayout rlt1 = findViewById(R.id.rtltemper1);
+        rlt1.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                LayoutInflater li = LayoutInflater.from(WeatherAsset.this);
+                View customDialogView = li.inflate(R.layout.custom_dialog, null);
+                final AlertDialog alertDialogBuilder  = new AlertDialog.Builder(WeatherAsset.this).create();
+                final GraphView grphview =  (GraphView) customDialogView.findViewById(R.id.graphdialog);
+                alertDialogBuilder.setView(customDialogView);
+                alertDialogBuilder.show();
+                final TextView tv1 = (TextView) customDialogView.findViewById(R.id.titledialog);
+                tv1.setText("Weather Asset 1 Temperature");
+                //graph = (GraphView) findViewById(R.id.graphdialog);
+                graphDatabaseHelper = new GraphDatabaseHelper(WeatherAsset.this);
+                sqLiteDatabase = graphDatabaseHelper.getWritableDatabase();
+                series.resetData(getDataPoint());
+                grphview.addSeries(series);
+                series.setTitle("Temperature");
+                series.setThickness(8);
+                grphview.getLegendRenderer().setVisible(true);
+                grphview.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                grphview.getViewport().setXAxisBoundsManual(true);
+                grphview.getViewport().setYAxisBoundsManual(true);
+                grphview.getViewport().scrollToEnd();
+                grphview.getViewport().setScalable(true);
+                grphview.getViewport().setScalableY(true);
+                grphview.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+                    public String formatLabel(double value, boolean x){
+                        if (x)
+                        {
+                            return sdf.format(new Date((long)value));
+                        }else{
+                            return super.formatLabel(value, x);
+                        }
+                    }
+                });
+                GridLabelRenderer gridLabel = grphview.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle("Time");
+                gridLabel.setHorizontalAxisTitleTextSize(30);
+                gridLabel.setVerticalAxisTitle("Temperature (Celsius)");
+                gridLabel.setVerticalAxisTitleTextSize(30);
+                return true;
+            }
+        });
+        RelativeLayout rlt2 = findViewById(R.id.rtlhumidity1);
+        rlt2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                LayoutInflater li = LayoutInflater.from(WeatherAsset.this);
+                View customDialogView = li.inflate(R.layout.custom_dialog, null);
+                final AlertDialog alertDialogBuilder  = new AlertDialog.Builder(WeatherAsset.this).create();
+                final GraphView grphview2 =  (GraphView) customDialogView.findViewById(R.id.graphdialog);
+                alertDialogBuilder.setView(customDialogView);
+                alertDialogBuilder.show();
+                final TextView tv2 = (TextView) customDialogView.findViewById(R.id.titledialog);
+                tv2.setText("Weather Asset 1 Humidity");
+                graphDatabaseHelper = new GraphDatabaseHelper(WeatherAsset.this);
+                sqLiteDatabase = graphDatabaseHelper.getWritableDatabase();
+                series2.resetData(getDataPoint2());
+                grphview2.addSeries(series2);
+                series2.setTitle("Humidity");
+                series2.setThickness(8);
+                grphview2.getViewport().setXAxisBoundsManual(true);
+                grphview2.getViewport().setYAxisBoundsManual(true);
+                grphview2.getViewport().scrollToEnd();
+                grphview2.getViewport().setScalable(true);
+                grphview2.getViewport().setScalableY(true);
+                grphview2.getLegendRenderer().setVisible(true);
+                grphview2.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                grphview2.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+                    public String formatLabel(double value, boolean x){
+                        if (x)
+                        {
+                            return sdf.format(new Date((long) value));
+                        }else{
+                            return super.formatLabel(value, x);
+                        }
+                    }
+                });
+                GridLabelRenderer gridLabel = grphview2.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle("Time");
+                gridLabel.setHorizontalAxisTitleTextSize(30);
+                gridLabel.setVerticalAxisTitle("Humidity (%)");
+                gridLabel.setVerticalAxisTitleTextSize(30);
+                return true;
+            }
+        });
+        ImageView img= findViewById(R.id.backpic2);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                ActivityWeatherData.super.onBackPressed();
+            }
+        });
+        RelativeLayout rlt3 = findViewById(R.id.rtlwindspeed1);
+        rlt3.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                LayoutInflater li = LayoutInflater.from(WeatherAsset.this);
+                View customDialogView = li.inflate(R.layout.custom_dialog, null);
+                final AlertDialog alertDialogBuilder  = new AlertDialog.Builder(WeatherAsset.this).create();
+                final GraphView grphview3 =  (GraphView) customDialogView.findViewById(R.id.graphdialog);
+                alertDialogBuilder.setView(customDialogView);
+                alertDialogBuilder.show();
+                final TextView tv3 = (TextView) customDialogView.findViewById(R.id.titledialog);
+                tv3.setText("Weather Asset 1 Wind speed");
+                graphDatabaseHelper = new GraphDatabaseHelper(WeatherAsset.this);
+                sqLiteDatabase = graphDatabaseHelper.getWritableDatabase();
+                series3.resetData(getDataPoint3());
+                grphview3.addSeries(series3);
+                series3.setTitle("Windspeed");
+                series3.setThickness(8);
+                grphview3.getLegendRenderer().setVisible(true);
+                grphview3.getViewport().setXAxisBoundsManual(true);
+                grphview3.getViewport().setYAxisBoundsManual(true);
+                grphview3.getViewport().scrollToEnd();
+                grphview3.getViewport().setScalable(true);
+                grphview3.getViewport().setScalableY(true);
+                grphview3.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                grphview3.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+                    public String formatLabel(double value, boolean x){
+                        if (x)
+                        {
+                            return sdf.format(new Date((long)value));
+                        }else{
+                            return super.formatLabel(value, x);
+                        }
+                    }
+                });
+                GridLabelRenderer gridLabel = grphview3.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle("Time");
+                gridLabel.setHorizontalAxisTitleTextSize(30);
+                gridLabel.setVerticalAxisTitle("Wind speed (km/h)");
+                gridLabel.setVerticalAxisTitleTextSize(30);
+                return true;
+            }
+        });
+        RelativeLayout rltdirec = findViewById(R.id.rtlwinddirec1);
+        rltdirec.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                LayoutInflater li = LayoutInflater.from(WeatherAsset.this);
+                View customDialogView = li.inflate(R.layout.custom_dialog, null);
+                final AlertDialog alertDialogBuilder  = new AlertDialog.Builder(WeatherAsset.this).create();
+                final GraphView grphview4 =  (GraphView) customDialogView.findViewById(R.id.graphdialog);
+                alertDialogBuilder.setView(customDialogView);
+                alertDialogBuilder.show();
+                final TextView tv3 = (TextView) customDialogView.findViewById(R.id.titledialog);
+                tv3.setText("Weather Asset 1 Wind direction");
+                graphDatabaseHelper = new GraphDatabaseHelper(WeatherAsset.this);
+                sqLiteDatabase = graphDatabaseHelper.getWritableDatabase();
+                series4.resetData(getDataPoint4());
+                grphview4.addSeries(series4);
+                series4.setTitle("Wind direction");
+                series4.setThickness(8);
+                grphview4.getLegendRenderer().setVisible(true);
+                grphview4.getViewport().setXAxisBoundsManual(true);
+                grphview4.getViewport().setYAxisBoundsManual(true);
+                grphview4.getViewport().scrollToEnd();
+                grphview4.getViewport().setScalable(true);
+                grphview4.getViewport().setScalableY(true);
+                grphview4.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                grphview4.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+                    public String formatLabel(double value, boolean x){
+                        if (x)
+                        {
+                            return sdf.format(new Date((long)value));
+                        }else{
+                            return super.formatLabel(value, x);
+                        }
+                    }
+                });
+                GridLabelRenderer gridLabel = grphview4.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle("Time");
+                gridLabel.setHorizontalAxisTitleTextSize(30);
+                gridLabel.setVerticalAxisTitle("Wind direction");
+                gridLabel.setVerticalAxisTitleTextSize(30);
+                return true;
+            }
+
+        });
+        RelativeLayout rltpress = findViewById(R.id.rtltemper7);
+        rltpress.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                LayoutInflater li = LayoutInflater.from(WeatherAsset.this);
+                View customDialogView = li.inflate(R.layout.custom_dialog, null);
+                final AlertDialog alertDialogBuilder  = new AlertDialog.Builder(WeatherAsset.this).create();
+                final GraphView grphview5 =  (GraphView) customDialogView.findViewById(R.id.graphdialog);
+                alertDialogBuilder.setView(customDialogView);
+                alertDialogBuilder.show();
+                final TextView tv3 = (TextView) customDialogView.findViewById(R.id.titledialog);
+                tv3.setText("Weather Asset 1 Pressure");
+                graphDatabaseHelper = new GraphDatabaseHelper(WeatherAsset.this);
+                sqLiteDatabase = graphDatabaseHelper.getWritableDatabase();
+                series5.resetData(getDataPoint5());
+                grphview5.addSeries(series5);
+                series5.setTitle("Pressure");
+                series5.setThickness(8);
+                grphview5.getLegendRenderer().setVisible(true);
+                grphview5.getViewport().setXAxisBoundsManual(true);
+                grphview5.getViewport().setYAxisBoundsManual(true);
+                grphview5.getViewport().scrollToEnd();
+                grphview5.getViewport().setScalable(true);
+                grphview5.getViewport().setScalableY(true);
+                grphview5.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                grphview5.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+                    public String formatLabel(double value, boolean x){
+                        if (x)
+                        {
+                            return sdf.format(new Date((long)value));
+                        }else{
+                            return super.formatLabel(value, x);
+                        }
+                    }
+                });
+                GridLabelRenderer gridLabel = grphview5.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle("Time");
+                gridLabel.setHorizontalAxisTitleTextSize(30);
+                gridLabel.setVerticalAxisTitle("Pressure");
+                gridLabel.setVerticalAxisTitleTextSize(30);
+                return true;
+            }
+        });
+        RelativeLayout rltmaxtemp = findViewById(R.id.rtlhumidity7);
+        rltmaxtemp.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                LayoutInflater li = LayoutInflater.from(WeatherAsset.this);
+                View customDialogView = li.inflate(R.layout.custom_dialog, null);
+                final AlertDialog alertDialogBuilder  = new AlertDialog.Builder(WeatherAsset.this).create();
+                final GraphView grphview6 =  (GraphView) customDialogView.findViewById(R.id.graphdialog);
+                alertDialogBuilder.setView(customDialogView);
+                alertDialogBuilder.show();
+                final TextView tv3 = (TextView) customDialogView.findViewById(R.id.titledialog);
+                tv3.setText("Weather Asset 1 Max temperature");
+                graphDatabaseHelper = new GraphDatabaseHelper(WeatherAsset.this);
+                sqLiteDatabase = graphDatabaseHelper.getWritableDatabase();
+                series6.resetData(getDataPoint6());
+                grphview6.addSeries(series6);
+                series6.setTitle("Max temperature");
+                series6.setThickness(8);
+                grphview6.getViewport().setXAxisBoundsManual(true);
+                grphview6.getViewport().setYAxisBoundsManual(true);
+                grphview6.getViewport().scrollToEnd();
+                grphview6.getViewport().setScalable(true);
+                grphview6.getViewport().setScalableY(true);
+                grphview6.getLegendRenderer().setVisible(true);
+                grphview6.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                grphview6.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+                    public String formatLabel(double value, boolean x){
+                        if (x)
+                        {
+                            return sdf.format(new Date((long)value));
+                        }else{
+                            return super.formatLabel(value, x);
+                        }
+                    }
+                });
+                GridLabelRenderer gridLabel = grphview6.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle("Time");
+                gridLabel.setHorizontalAxisTitleTextSize(30);
+                gridLabel.setVerticalAxisTitle("Max temperature (Celsius)");
+                return true;
+            }
+        });
+        RelativeLayout rltmintemp = findViewById(R.id.rtlwinddirec4);
+        rltmintemp.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                LayoutInflater li = LayoutInflater.from(WeatherAsset.this);
+                View customDialogView = li.inflate(R.layout.custom_dialog, null);
+                final AlertDialog alertDialogBuilder  = new AlertDialog.Builder(WeatherAsset.this).create();
+                final GraphView grphview7 =  (GraphView) customDialogView.findViewById(R.id.graphdialog);
+                alertDialogBuilder.setView(customDialogView);
+                alertDialogBuilder.show();
+                final TextView tv3 = (TextView) customDialogView.findViewById(R.id.titledialog);
+                tv3.setText("Weather Asset 1 Min temperature");
+                graphDatabaseHelper = new GraphDatabaseHelper(WeatherAsset.this);
+                sqLiteDatabase = graphDatabaseHelper.getWritableDatabase();
+                series7.resetData(getDataPoint7());
+                grphview7.addSeries(series7);
+                series7.setTitle("Min temperature");
+                series7.setThickness(8);
+                grphview7.getViewport().setXAxisBoundsManual(true);
+                grphview7.getViewport().setYAxisBoundsManual(true);
+                grphview7.getViewport().scrollToEnd();
+                grphview7.getViewport().setScalable(true);
+                grphview7.getViewport().setScalableY(true);
+                grphview7.getLegendRenderer().setVisible(true);
+                grphview7.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                grphview7.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+                    public String formatLabel(double value, boolean x){
+                        if (x)
+                        {
+                            return sdf.format(new Date((long)value));
+                        }else{
+                            return super.formatLabel(value, x);
+                        }
+                    }
+                });
+                GridLabelRenderer gridLabel = grphview7.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle("Time");
+                gridLabel.setHorizontalAxisTitleTextSize(30);
+                gridLabel.setVerticalAxisTitle("Min temperature (Celsius)");
+                return true;
+            }
+        });
+        RelativeLayout rltsea = findViewById(R.id.rtlwindspeed7);
+        rltsea.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                LayoutInflater li = LayoutInflater.from(WeatherAsset.this);
+                View customDialogView = li.inflate(R.layout.custom_dialog, null);
+                final AlertDialog alertDialogBuilder  = new AlertDialog.Builder(WeatherAsset.this).create();
+                final GraphView grphview8 =  (GraphView) customDialogView.findViewById(R.id.graphdialog);
+                alertDialogBuilder.setView(customDialogView);
+                alertDialogBuilder.show();
+                final TextView tv3 = (TextView) customDialogView.findViewById(R.id.titledialog);
+                tv3.setText("Weather Asset 1 Sea level");
+                graphDatabaseHelper = new GraphDatabaseHelper(WeatherAsset.this);
+                sqLiteDatabase = graphDatabaseHelper.getWritableDatabase();
+                series8.resetData(getDataPoint8());
+                grphview8.addSeries(series8);
+                series8.setTitle("Sea level");
+                series8.setThickness(8);
+                grphview8.getViewport().setXAxisBoundsManual(true);
+                grphview8.getViewport().setYAxisBoundsManual(true);
+                grphview8.getViewport().scrollToEnd();
+                grphview8.getViewport().setScalable(true);
+                grphview8.getViewport().setScalableY(true);
+                grphview8.getLegendRenderer().setVisible(true);
+                grphview8.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                grphview8.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+                    public String formatLabel(double value, boolean x){
+                        if (x)
+                        {
+                            return sdf.format(new Date((long)value));
+                        }else{
+                            return super.formatLabel(value, x);
+                        }
+                    }
+                });
+                GridLabelRenderer gridLabel = grphview8.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle("Time");
+                gridLabel.setHorizontalAxisTitleTextSize(30);
+                gridLabel.setVerticalAxisTitle("Sea level");
+                return true;
+            }
+        });
+        RelativeLayout rltgrnd = findViewById(R.id.rtlid);
+        rltgrnd.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                LayoutInflater li = LayoutInflater.from(WeatherAsset.this);
+                View customDialogView = li.inflate(R.layout.custom_dialog, null);
+                final AlertDialog alertDialogBuilder  = new AlertDialog.Builder(WeatherAsset.this).create();
+                final GraphView grphview9 =  (GraphView) customDialogView.findViewById(R.id.graphdialog);
+                alertDialogBuilder.setView(customDialogView);
+                alertDialogBuilder.show();
+                final TextView tv3 = (TextView) customDialogView.findViewById(R.id.titledialog);
+                tv3.setText("Weather Asset 1 Ground level");
+                graphDatabaseHelper = new GraphDatabaseHelper(WeatherAsset.this);
+                sqLiteDatabase = graphDatabaseHelper.getWritableDatabase();
+                series9.resetData(getDataPoint9());
+                grphview9.addSeries(series9);
+                series9.setTitle("Ground level");
+                series9.setThickness(8);
+                grphview9.getViewport().setXAxisBoundsManual(true);
+                grphview9.getViewport().setYAxisBoundsManual(true);
+                grphview9.getViewport().scrollToEnd();
+                grphview9.getViewport().setScalable(true);
+                grphview9.getViewport().setScalableY(true);
+                grphview9.getLegendRenderer().setVisible(true);
+                grphview9.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                grphview9.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+                    public String formatLabel(double value, boolean x){
+                        if (x)
+                        {
+                            return sdf.format(new Date((long)value));
+                        }else{
+                            return super.formatLabel(value, x);
+                        }
+                    }
+                });
+                GridLabelRenderer gridLabel = grphview9.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle("Time");
+                gridLabel.setHorizontalAxisTitleTextSize(30);
+                gridLabel.setVerticalAxisTitle("Ground level");
+                return true;
+            }
+        });
+    }
+*/}
+
+   /* private DataPoint[] getDataPoint2(){
+        String[] columns = {"KEY_HUMITIME","KEY_HUMIDITY"};
+        Cursor cursor = graphDatabaseHelper.GetData("SELECT * FROM contacts WHERE name = 'Weather Asset'");
+        DataPoint[] dp = new DataPoint[cursor.getCount()];
+        //  if(cursor.getString(1)== "6H4PeKLRMea1L0WsRXXWp9") {
+        for (int i = 0; i < cursor.getCount(); i++) {
+            cursor.moveToNext();
+            dp[i] = new DataPoint(cursor.getLong(6), cursor.getInt(5));
+        }
+        //}
+        return dp;
+    }
+    private DataPoint[] getDataPoint(){
+        String[] columns = {"KEY_TEMPTIMESTAMP","KEY_TEMPERATURE"};
+        Cursor cursor = graphDatabaseHelper.GetData("SELECT * FROM contacts WHERE name = 'Weather Asset'");
+        DataPoint[] dp = new DataPoint[cursor.getCount()];
+        //  if(cursor.getString(1)== "6H4PeKLRMea1L0WsRXXWp9") {
+        for (int i = 0; i < cursor.getCount(); i++) {
+            cursor.moveToNext();
+            dp[i] = new DataPoint(cursor.getLong(4), cursor.getDouble(3));
+        }
+        //  }
+        return dp;
+    }
+    private DataPoint[] getDataPoint3(){
+        String[] columns = {"KEY_WINDSTIME","KEY_WINDSPEED"};
+        Cursor cursor = graphDatabaseHelper.GetData("SELECT * FROM contacts WHERE name = 'Weather Asset'");
+        DataPoint[] dp = new DataPoint[cursor.getCount()];
+        //  if(cursor.getString(1)== "6H4PeKLRMea1L0WsRXXWp9") {
+        for (int i = 0; i < cursor.getCount(); i++) {
+            cursor.moveToNext();
+            dp[i] = new DataPoint(cursor.getLong(8), cursor.getInt(7));
+        }
+        //}
+        return dp;
+    }*/
+}
