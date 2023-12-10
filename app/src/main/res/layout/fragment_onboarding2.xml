@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
-    tools:context=".OnboardingFragment2">
+    tools:context=".OnboardingFragment1">
 
     <ImageView
         android:layout_width="220dp"
@@ -19,16 +19,17 @@
         android:layout_marginTop="30dp"
         android:text="Key Features"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Access fast and accurate air quality data, receive immediate risk alerts, and easily review the historical changes in air quality. Stay informed and proactive for a healthier indoor environment."
+        android:text="Get quick, accurate air quality data, instant risk alerts, and review historical changes easily. Stay informed for a healthier indoor environment."
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="italic" />
 
 </LinearLayout>

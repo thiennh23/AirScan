@@ -19,16 +19,17 @@
         android:layout_marginTop="30dp"
         android:text="Welcome to AirScan"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Discover our indoor air quality monitoring solution, providing real-time tracking, automatic alerts, and a history of air quality data. Stay informed, receive instant notifications, and make informed decisions for a healthier living space."
+        android:text="Discover our indoor air quality solution: real-time tracking, alerts, and data history for a healthier living space. Stay informed with instant notifications."
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="italic" />
 
 </LinearLayout>
