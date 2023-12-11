@@ -15,7 +15,6 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -56,10 +55,7 @@ dependencies {
     implementation ("org.osmdroid:osmdroid-android:6.1.17")
     implementation ("com.makeramen:roundedimageview:2.3.0")
 
-    //Line Graph
-    implementation ("com.jjoe64:graphview:4.2.2")
-
-
-
+    // Chart and graph library
+   implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 }
