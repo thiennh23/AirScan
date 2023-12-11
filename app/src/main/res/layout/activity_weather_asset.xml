@@ -29,7 +29,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
                     android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/logo" />
+                    app:srcCompat="@drawable/logo_app" />
 
                 <TextView
                     android:layout_width="match_parent"
