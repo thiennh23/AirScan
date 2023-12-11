@@ -1,116 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".GraphViewActivity">
 
-    <LinearLayout
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="2">
+        android:layout_height="match_parent" />
+</RelativeLayout>
+
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="338dp"
-            android:orientation="vertical"
-            android:weightSum="1">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="#62929e"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="?attr/actionBarTheme" />
-
-                <ImageView
-                    android:id="@+id/back_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/icon_back" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
-                    android:text="Chart"
-                    android:textColor="#FFFFFF"
-                    android:textSize="35sp" />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:text="Select Attribute"
-                android:textColor="#62929e"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spinner3"
-                android:layout_width="match_parent"
-                android:layout_height="35dp" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Timeframe"
-                android:textColor="#62929e"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spinner4"
-                android:layout_width="match_parent"
-                android:layout_height="34dp" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Ending"
-                android:textColor="#62929e"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="TextView"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="#62929e"
-                android:text="Show" />
-        </LinearLayout>
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MainActivity">
+            android:orientation="vertical"
+            android:weightSum="2">
 
-            <com.jjoe64.graphview.GraphView
-                android:id="@+id/graph"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="338dp"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#62929e"
+                        android:minHeight="?attr/actionBarSize"
+                        android:theme="?attr/actionBarTheme" />
+
+                    <ImageView
+                        android:id="@+id/back_icon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/icon_back" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="65dp"
+                        android:text="Chart"
+                        android:textColor="#FFFFFF"
+                        android:textSize="35sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Select Attribute"
+                    android:textColor="#62929e"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Timeframe"
+                    android:textColor="#62929e"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinner4"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Ending"
+                    android:textColor="#62929e"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="TextView"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="15dp"
+                    android:backgroundTint="#62929e"
+                    android:text="Show" />
+            </LinearLayout>
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:ignore="MissingClass">
-            </com.jjoe64.graphview.GraphView>
+                tools:context=".MainActivity">
+
+                <com.jjoe64.graphview.GraphView
+                    android:id="@+id/graph"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="MissingClass">
+                </com.jjoe64.graphview.GraphView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
+    -->
