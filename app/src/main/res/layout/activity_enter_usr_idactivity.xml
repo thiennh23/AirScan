@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/logo_app"
+            android:src="@drawable/logo1"
             android:layout_gravity="center"
             />
         <TextView
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text="@string/verify"
             android:textAllCaps="false"
-            android:background="@drawable/btndesign"
+            android:backgroundTint="#62929e"
             android:layout_marginTop="20dp"
             />
     </LinearLayout>

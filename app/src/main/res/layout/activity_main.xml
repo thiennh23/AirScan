@@ -25,7 +25,7 @@
         <ImageView
             android:layout_width="220dp"
             android:layout_height="220dp"
-            android:src="@drawable/logo_app"
+            android:src="@drawable/logo1"
             android:layout_gravity="center"
             android:layout_marginTop="20dp" />
         <TextView
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="@string/FPass"
             android:textAllCaps="false"
-            android:backgroundTint="@color/btnBlue"
+            android:backgroundTint="#62929e"
             android:layout_marginTop="45dp" />
 
         <Button
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/Login"
             android:textAllCaps="false"
-            android:backgroundTint="@color/btnBlue"
+            android:backgroundTint="#62929e"
             android:layout_marginTop="30dp" />
 
         <Button
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="@string/Register"
             android:textAllCaps="false"
-            android:backgroundTint="@color/btnBlue"
+            android:backgroundTint="#62929e"
             android:layout_marginTop="30dp"  />
     </LinearLayout>
 
