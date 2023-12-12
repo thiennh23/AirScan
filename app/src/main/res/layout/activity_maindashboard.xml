@@ -96,7 +96,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView11"
+                            android:id="@+id/imageView11c"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -104,7 +104,7 @@
                             tools:srcCompat="@drawable/video_call" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/textView10c"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView" />
@@ -119,7 +119,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView11"
+                            android:id="@+id/imageView11b"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -127,7 +127,7 @@
                             tools:srcCompat="@drawable/notification" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/textView10b"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView" />
@@ -142,7 +142,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView11"
+                            android:id="@+id/imageView11a"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -150,7 +150,7 @@
                             tools:srcCompat="@drawable/voice_call" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/textView10a"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView" />
@@ -249,7 +249,7 @@
                             android:background="@drawable/background_edittext_search">
 
                             <ImageView
-                                android:id="@+id/imageView13"
+                                android:id="@+id/imageView13d"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -265,7 +265,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
-                            android:id="@+id/textView15"
+                            android:id="@+id/textView15d"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -289,7 +289,7 @@
                             android:background="@drawable/background_edittext_search">
 
                             <ImageView
-                                android:id="@+id/imageView13"
+                                android:id="@+id/imageView13c"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -305,7 +305,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
-                            android:id="@+id/textView15"
+                            android:id="@+id/textView15c"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -329,7 +329,7 @@
                             android:background="@drawable/background_edittext_search">
 
                             <ImageView
-                                android:id="@+id/imageView13"
+                                android:id="@+id/imageView13b"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -345,7 +345,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
-                            android:id="@+id/textView15"
+                            android:id="@+id/textView15b"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -369,7 +369,7 @@
                             android:background="@drawable/background_edittext_search">
 
                             <ImageView
-                                android:id="@+id/imageView13"
+                                android:id="@+id/imageView13a"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -385,7 +385,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
-                            android:id="@+id/textView15"
+                            android:id="@+id/textView15a"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
