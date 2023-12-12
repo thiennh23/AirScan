@@ -97,7 +97,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/edtdesign"
+        android:backgroundTint="#62929e"
         android:text="More details"
         android:textColor="@color/white"
         android:textSize="15sp"></Button>
