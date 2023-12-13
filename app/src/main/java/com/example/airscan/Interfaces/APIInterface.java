@@ -1,10 +1,14 @@
 package com.example.airscan.Interfaces;
 
+import com.example.airscan.Chart.AssetDataPoint;
+import com.example.airscan.Chart.AssetDataPointRequestBody;
 import com.example.airscan.Models.Asset;
 import com.example.airscan.Models.Map;
 import com.example.airscan.Models.Token;
 import com.example.airscan.Models.User;
 import com.google.gson.JsonObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -40,6 +44,14 @@ public interface APIInterface {
     @GET("api/master/map")
     Call<Map> getMap();
 
+    //USER IN4
     @GET("api/master/user/user")
     Call<User> getUser(); // Add the return type for getUserAsset
+
+    //Asset Datapoint
+    @POST("api/master/asset/datapoint/{assetID}/attribute/{assetAttribute}")
+    Call<List<AssetDataPoint>> getListDataPoint(
+            @Path("assetID") String assetID,
+            @Path("assetAttribute") String assetAttribute,
+            @Body AssetDataPointRequestBody body);
 }

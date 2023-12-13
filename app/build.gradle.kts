@@ -57,5 +57,6 @@ dependencies {
 
     // Chart and graph library
    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.jjoe64:graphview:4.2.2");
 
 }
