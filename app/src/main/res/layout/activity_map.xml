@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="#eaf4f4"
     tools:context=".MapActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,31 +74,35 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
+            android:backgroundTint="#62929e"
             android:layout_marginTop="300dp"/>
 
         <Button
             android:id="@+id/BtnTest2"
-            android:layout_width="100dp"
-            android:text="Graph day ne"
+            android:layout_width="110dp"
             android:layout_height="70dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="350dp"/>
+            android:layout_marginTop="350dp"
+            android:text="Graph day ne"
+            android:backgroundTint="#62929e"/>
 
         <Button
-        android:id="@+id/BtnTest3"
-        android:layout_width="100dp"
-        android:text="USER PROFILE"
-        android:layout_height="70dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="450dp"/>
+            android:id="@+id/BtnTest3"
+            android:layout_width="110dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="450dp"
+            android:text="USER PROFILE"
+            android:backgroundTint="#62929e"/>
 
         <Button
             android:id="@+id/BtnTest4"
-            android:layout_width="100dp"
-            android:text="CHART API"
+            android:layout_width="110dp"
             android:layout_height="70dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="550dp"/>
+            android:layout_marginTop="550dp"
+            android:text="CHART API"
+            android:backgroundTint="#62929e"/>
     </RelativeLayout>
     </LinearLayout>
 

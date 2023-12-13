@@ -260,10 +260,10 @@
                 android:layout_gravity="center"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="40dp"
-                android:backgroundTint="#009688"
+                android:backgroundTint="#62929e"
                 android:text="Logout"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:layout_centerHorizontal="true"/>
         </RelativeLayout>
