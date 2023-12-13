@@ -3,6 +3,7 @@ package com.example.airscan.Interfaces;
 import com.example.airscan.Models.Asset;
 import com.example.airscan.Models.Map;
 import com.example.airscan.Models.Token;
+import com.example.airscan.Models.User;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -38,4 +39,7 @@ public interface APIInterface {
     //GET MAP
     @GET("api/master/map")
     Call<Map> getMap();
+
+    @GET("api/master/user/user")
+    Call<User> getUser(); // Add the return type for getUserAsset
 }

@@ -82,6 +82,14 @@
             android:layout_height="70dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="350dp"/>
+
+        <Button
+            android:id="@+id/BtnTest3"
+            android:layout_width="100dp"
+            android:text="USER PROFILE"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="450dp"/>
     </RelativeLayout>
     </LinearLayout>
 
