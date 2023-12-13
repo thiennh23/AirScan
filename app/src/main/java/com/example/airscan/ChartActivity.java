@@ -173,14 +173,6 @@ public class ChartActivity extends AppCompatActivity {
             }
         };
 
-
-
-
-
-
-
-
-
         show_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
