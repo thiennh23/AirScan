@@ -126,45 +126,42 @@ public class ViewAssetActivity extends AppCompatActivity {
                 //RAINFALL
                 json = gson.toJson(attrObj.rainfall);
                 WeatherData rainfall = gson.fromJson(json, WeatherData.class);
-                mAssets.add(new ViewAsset("RAIN FALL (mm)", CheckNull(rainfall.getValue()),R.drawable.humidity));
-                //CHUA CO HINH
+                mAssets.add(new ViewAsset("RAIN FALL (mm)", CheckNull(rainfall.getValue()),R.drawable.rainfall));
 
                 //MANUFACTURER
                 json = gson.toJson(attrObj.manufacturer);
                 WeatherData manufacturer = gson.fromJson(json, WeatherData.class);
-                mAssets.add(new ViewAsset("MANUFACTURER", CheckNull(manufacturer.getValue()),R.drawable.humidity));
-                //CHUA CO HINH
+                mAssets.add(new ViewAsset("MANUFACTURER", CheckNull(manufacturer.getValue()),R.drawable.manufacturer));
 
                 //PLACE
                 json = gson.toJson(attrObj.place);
                 WeatherData place = gson.fromJson(json, WeatherData.class);
-                mAssets.add(new ViewAsset("PLACE", CheckNull(place.getValue()),R.drawable.humidity));
-                //CHUA CO HINH
+                mAssets.add(new ViewAsset("PLACE", CheckNull(place.getValue()),R.drawable.place));
 
                 //SUN AZIMUTH
                 json = gson.toJson(attrObj.sunAzimuth);
                 WeatherData sunAzimuth = gson.fromJson(json, WeatherData.class);
-                mAssets.add(new ViewAsset("SUN AZIMUTH", CheckNull(sunAzimuth.getValue()),R.drawable.humidity));
+                mAssets.add(new ViewAsset("SUN AZIMUTH", CheckNull(sunAzimuth.getValue()),R.drawable.sun_azimuth));
 
                 //SUN ALTITUDE
                 json = gson.toJson(attrObj.sunAltitude);
                 WeatherData sunAltitude = gson.fromJson(json, WeatherData.class);
-                mAssets.add(new ViewAsset("SUN ALTITUDE", CheckNull(sunAltitude.getValue()),R.drawable.mintem));
+                mAssets.add(new ViewAsset("SUN ALTITUDE", CheckNull(sunAltitude.getValue()),R.drawable.sun_altitude));
 
                 //SUN IRRADIANCE
                 json = gson.toJson(attrObj.sunIrradiance);
                 WeatherData sunIrradiance = gson.fromJson(json, WeatherData.class);
-                mAssets.add(new ViewAsset("SUN IRRADIANCE", CheckNull(sunIrradiance.getValue()),R.drawable.maxtem));
+                mAssets.add(new ViewAsset("SUN IRRADIANCE", CheckNull(sunIrradiance.getValue()),R.drawable.sun_irradiance));
 
                 //SUN ZENITH
                 json = gson.toJson(attrObj.sunZenith);
                 WeatherData sunZenith = gson.fromJson(json, WeatherData.class);
-                mAssets.add(new ViewAsset("SUN ZENITH", CheckNull(sunZenith.getValue()),R.drawable.soil));
+                mAssets.add(new ViewAsset("SUN ZENITH", CheckNull(sunZenith.getValue()),R.drawable.sun_zenith));
 
                 //UV INDEX
                 json = gson.toJson(attrObj.uVIndex);
                 WeatherData uVIndex = gson.fromJson(json, WeatherData.class);
-                mAssets.add(new ViewAsset("UV INDEX", CheckNull(uVIndex.getValue()),R.drawable.sealevel));
+                mAssets.add(new ViewAsset("UV INDEX", CheckNull(uVIndex.getValue()),R.drawable.uv_index));
 
 
                 //LOAD TO RECYCLER VIEW
@@ -247,28 +244,27 @@ public class ViewAssetActivity extends AppCompatActivity {
                 //BRIGHTNESS (%)
                 json = gson.toJson(lightObj.brightness);
                 LightData brightness = gson.fromJson(json, LightData.class);
-                mAssets.add(new ViewAsset("BRIGHTNESS (%)", CheckNull(brightness.getValue()),R.drawable.windspeed));
+                mAssets.add(new ViewAsset("BRIGHTNESS (%)", CheckNull(brightness.getValue()),R.drawable.brightness));
 
                 //COLOUR TEMPERATURE (K)
                 json = gson.toJson(lightObj.colourTemperature);
                 LightData colourTemperature = gson.fromJson(json, LightData.class);
-                mAssets.add(new ViewAsset("COLOUR TEMPERATURE (K)", CheckNull(colourTemperature.getValue()),R.drawable.winddirection));
+                mAssets.add(new ViewAsset("COLOUR TEMPERATURE (K)", CheckNull(colourTemperature.getValue()),R.drawable.colour_temperature));
 
                 //ON OF
                 json = gson.toJson(lightObj.onOff);
                 LightData onOff = gson.fromJson(json, LightData.class);
-                mAssets.add(new ViewAsset("DEVICE ON/OFF", CheckNull(onOff.getValue()),R.drawable.temperature));
+                mAssets.add(new ViewAsset("DEVICE ON/OFF", CheckNull(onOff.getValue()),R.drawable.on_off));
 
                 //COLOUR RGB
                 json = gson.toJson(lightObj.colourRGB);
                 LightData colourRGB = gson.fromJson(json, LightData.class);
-                mAssets.add(new ViewAsset("COLOUR RGB", CheckNull(colourRGB.getValue()),R.drawable.humidity));
+                mAssets.add(new ViewAsset("COLOUR RGB", CheckNull(colourRGB.getValue()),R.drawable.colour_rgb));
 
                 //EMAIL
                 json = gson.toJson(lightObj.email);
                 LightData email = gson.fromJson(json, LightData.class);
-                mAssets.add(new ViewAsset("EMAIL)", CheckNull(email.getValue()),R.drawable.humidity));
-                //CHUA CO HINH
+                mAssets.add(new ViewAsset("EMAIL)", CheckNull(email.getValue()),R.drawable.email_picture));
 
                 //LOAD TO RECYCLER VIEW
                 RecyclerViewAsset();
