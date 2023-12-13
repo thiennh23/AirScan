@@ -3,14 +3,11 @@ package com.example.airscan;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,15 +15,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.airscan.Chart.ExportDataApi;
-import com.example.airscan.Models.Token;
 import com.example.airscan.Others.APIClient;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -50,8 +44,6 @@ public class ChartActivity extends AppCompatActivity {
     LineGraphSeries<DataPoint> series;
     Handler ui_handler = new Handler();
     Spinner attribute_spinner, timeframe_spinner;
-    Thread background_Thread;
-    private ConstraintLayout backgroundLayout;
 
     String getQueryAttribute() {
         String template = "[{\"id\":\"%s\",\"name\":\"%s\"}]";
@@ -75,8 +67,7 @@ public class ChartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chart);
 
         show_btn = findViewById(R.id.btn_show);
-        backgroundLayout = findViewById(R.id.background4);
-        timeframe_spinner = findViewById(R.id.spinner_timeframe);
+        timeframe_spinner = findViewById(R.id.spinner2);
 
         timeframe_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -114,35 +105,17 @@ public class ChartActivity extends AppCompatActivity {
         timeframe_spinner.setAdapter(adapter);
         timeframe_spinner.setSelection(0);
 
-
         paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5);
         paint.setPathEffect(new DashPathEffect(new float[]{8, 5}, 0));
 
-
-        graph = findViewById(R.id.idGraphView);
+        graph = findViewById(R.id.chart);
         graph.setTitleColor(R.color.pieGreen);
         graph.setCursorMode(true);
         graph.setTitleColor(R.color.pieRed);
         graph.setTitleTextSize(30);
-
-        graph.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_UP) {
-//                    Dashboard.viewPager.setUserInputEnabled(true);
-//                    return true;
-//                }
-//                if (Dashboard.viewPager.isUserInputEnabled())
-//                    Dashboard.viewPager.setUserInputEnabled(false);
-
-                return false;
-            }
-
-        });
 
 
         DefaultLabelFormatter custom_formatter = new DefaultLabelFormatter() {
@@ -176,7 +149,6 @@ public class ChartActivity extends AppCompatActivity {
         show_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Show", String.valueOf(ChartActivity.last_time));
                 if (ChartActivity.mode == 0) {
                     Map<String, String> query = new HashMap<>();
                     query.put("attributeRefs", getQueryAttribute());
@@ -190,8 +162,6 @@ public class ChartActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-
-                                Log.d("interrupt","false");
                                 ExportDataApi export_data = new ExportDataApi("https://uiot.ixxc.dev/api/master/asset/datapoint/export", "GET", query, APIClient.Usertoken);
                                 data = export_data.GetData();
                                 int stop = 0;
@@ -201,7 +171,7 @@ public class ChartActivity extends AppCompatActivity {
                                     ui_handler.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getApplicationContext(), "Empty data", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "No data", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                     return;
@@ -259,30 +229,19 @@ public class ChartActivity extends AppCompatActivity {
                                             graph.setCursorMode(false);
                                             graph.getViewport().setScrollable(true);
                                         }
-
-
                                     }
                                 });
-
-
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-
-
                         }
                     });
                     data_thread.start();
-
-
                 }
-
-
             }
         });
 
-
-        attribute_spinner = findViewById(R.id.spinner_attribute);
+        attribute_spinner = findViewById(R.id.spinner1);
         attribute_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -294,8 +253,6 @@ public class ChartActivity extends AppCompatActivity {
                 }
                 attribute_id = position;
             }
-
-
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -309,21 +266,10 @@ public class ChartActivity extends AppCompatActivity {
         attribute_ArrayList.add("Rainfall");
         attribute_ArrayList.add("Wind speed");
         ArrayAdapter<String> attribute_adapter = new ArrayAdapter<>(getApplicationContext(),
-                R.layout.spinner_item, // Sử dụng tệp layout tùy chỉnh ở đây
+                R.layout.spinner_item,
                 attribute_ArrayList
         );
         attribute_adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         attribute_spinner.setAdapter(attribute_adapter);
-
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7"));
-        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-        if(hourOfDay >= 5 && hourOfDay <= 17)
-        {
-        } else {
-            backgroundLayout.setBackgroundResource(R.drawable.lock);
-            show_btn.setBackgroundResource(R.drawable.lock);
-            attribute_spinner.setBackgroundResource(R.drawable.custom_spinner);
-            timeframe_spinner.setBackgroundResource(R.drawable.custom_spinner);
-        }
     }
 }
