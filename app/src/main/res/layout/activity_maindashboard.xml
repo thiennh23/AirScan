@@ -47,14 +47,25 @@
                     app:layout_constraintBottom_toBottomOf="@+id/imageView5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imageView5"
-                    app:srcCompat="@drawable/humiditylogo" />
+                    app:srcCompat="@drawable/logo1" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Hello"
+                    android:text="Hello,"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                <TextView
+                    android:id="@+id/tvUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="75dp"
+                    android:text="User"
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -212,6 +223,7 @@
 
                     <!-- ImageButton 1 -->
                     <ImageButton
+                        android:id="@+id/btnReport"
                         android:layout_width="0dp"
                         android:layout_height="61dp"
                         android:layout_columnWeight="1"
@@ -222,16 +234,18 @@
 
                     <!-- ImageButton 2 -->
                     <ImageButton
+                        android:id="@+id/btnDevice"
                         android:layout_width="0dp"
                         android:layout_height="59dp"
                         android:layout_columnWeight="1"
                         android:background="@android:color/transparent"
                         android:onClick="buttonClick5"
                         android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_5" />
+                        android:src="@drawable/weathericon" />
 
                     <!-- ImageButton 3 -->
                     <ImageButton
+                        android:id="@+id/btnSetting"
                         android:layout_width="0dp"
                         android:layout_height="61dp"
                         android:layout_columnWeight="1"
@@ -249,6 +263,7 @@
 
                     <!-- TextView 1 -->
                     <TextView
+                        android:id="@+id/tvReport"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -258,15 +273,17 @@
 
                     <!-- TextView 2 -->
                     <TextView
+                        android:id="@+id/tvDevice"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Calendar"
+                        android:text="Weather asset"
                         android:textStyle="bold" />
 
                     <!-- TextView 3 -->
                     <TextView
+                        android:id="@+id/tvSetting"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -292,14 +309,14 @@
 
                     <!-- ImageButton 1 -->
                     <ImageButton
-                        android:id="@+id/imageButton1"
+                        android:id="@+id/lightassettv"
                         android:layout_width="0dp"
                         android:layout_height="56dp"
                         android:layout_columnWeight="1"
                         android:background="@android:color/transparent"
                         android:onClick="buttonClick1"
                         android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_1" />
+                        android:src="@drawable/lightasset" />
 
                     <!-- ImageButton 2 -->
                     <ImageButton
@@ -332,15 +349,17 @@
 
                     <!-- TextView 1 -->
                     <TextView
+                        android:id="@+id/lightassettv1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Inbox"
+                        android:text="Light assset"
                         android:textStyle="bold" />
 
                     <!-- TextView 2 -->
                     <TextView
+                        android:id="@+id/tvMap"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

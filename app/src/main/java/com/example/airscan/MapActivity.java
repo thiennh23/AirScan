@@ -61,42 +61,6 @@ public class MapActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_map);
 
-        Button btntest = findViewById(R.id.BtnTest);
-        btntest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, ViewAssetActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button btntest2 = findViewById(R.id.BtnTest2);
-        btntest2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, GraphViewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button btntest3 = findViewById(R.id.BtnTest3);
-        btntest3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, UserActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button btntest4 = findViewById(R.id.BtnTest4);
-        btntest4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, ChartActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         SearchView searchView = findViewById(R.id.location);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
