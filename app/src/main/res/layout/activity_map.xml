@@ -68,36 +68,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="250dp"/>
 
-        <Button
-            android:id="@+id/BtnTest"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="300dp"/>
 
-        <Button
-            android:id="@+id/BtnTest2"
-            android:layout_width="100dp"
-            android:text="Graph day ne"
-            android:layout_height="70dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="350dp"/>
-
-        <Button
-        android:id="@+id/BtnTest3"
-        android:layout_width="100dp"
-        android:text="USER PROFILE"
-        android:layout_height="70dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="450dp"/>
-
-        <Button
-            android:id="@+id/BtnTest4"
-            android:layout_width="100dp"
-            android:text="CHART API"
-            android:layout_height="70dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="550dp"/>
     </RelativeLayout>
     </LinearLayout>
 
