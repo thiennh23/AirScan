@@ -90,7 +90,7 @@
 
             <LinearLayout
                 android:layout_width="310dp"
-                android:layout_height="87dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="48dp"
                 android:layout_marginTop="-47dp"
                 android:background="@drawable/white_top_buttons"
@@ -162,9 +162,54 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Cloud"
+                    android:text="RainFall"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <!-- TextView 1 -->
+                <TextView
+                    android:id="@+id/temp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="30dp"
+                    android:text="20"
+                    android:textColor="@color/pieRed"
+                    android:textStyle="bold" />
+
+                <!-- TextView 2 -->
+                <TextView
+                    android:id="@+id/humi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="30dp"
+                    android:text="20"
+                    android:textColor="@color/pieRed"
+                    android:textStyle="bold" />
+
+                <!-- TextView 3 -->
+                <TextView
+                    android:id="@+id/rainfall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="30dp"
+                    android:text="20"
+                    android:textColor="@color/pieRed"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -210,7 +255,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="0dp"
                 android:orientation="vertical">
 
                 <!-- EditText Section -->
@@ -331,14 +376,14 @@
 
                     <!-- ImageButton 3 -->
                     <ImageButton
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/graphbtn"
                         android:layout_width="0dp"
                         android:layout_height="58dp"
                         android:layout_columnWeight="1"
                         android:background="@android:color/transparent"
                         android:onClick="buttonClick3"
                         android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_3" />
+                        android:src="@drawable/database" />
                 </GridLayout>
 
                 <LinearLayout
@@ -369,11 +414,12 @@
 
                     <!-- TextView 3 -->
                     <TextView
+                        android:id="@+id/graphtv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Chats"
+                        android:text="Database"
                         android:textStyle="bold" />
                 </LinearLayout>
 
