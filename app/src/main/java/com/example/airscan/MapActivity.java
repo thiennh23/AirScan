@@ -79,6 +79,15 @@ public class MapActivity extends AppCompatActivity {
             }
         });
 
+        Button btntest3 = findViewById(R.id.BtnTest3);
+        btntest3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, UserActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         SearchView searchView = findViewById(R.id.location);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
