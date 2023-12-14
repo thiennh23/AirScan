@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
 
-public class ExportDataApi {
+public class ExportData {
     URL url;
     HttpURLConnection con;
 
@@ -39,9 +39,9 @@ public class ExportDataApi {
         return result;
     }
 
-    public ExportDataApi(String url,
-                         String method,
-                         Map<String, String> query, String token) throws IOException {
+    public ExportData(String url,
+                      String method,
+                      Map<String, String> query, String token) throws IOException {
 
 
         this.url = new URL(full_url(url, query));

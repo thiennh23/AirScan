@@ -1,7 +1,6 @@
 package com.example.airscan;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -15,7 +14,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.airscan.Chart.ExportDataApi;
+import com.example.airscan.Chart.ExportData;
 import com.example.airscan.Others.APIClient;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
@@ -162,7 +161,7 @@ public class ChartActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                ExportDataApi export_data = new ExportDataApi("https://uiot.ixxc.dev/api/master/asset/datapoint/export", "GET", query, APIClient.Usertoken);
+                                ExportData export_data = new ExportData("https://uiot.ixxc.dev/api/master/asset/datapoint/export", "GET", query, APIClient.Usertoken);
                                 data = export_data.GetData();
                                 int stop = 0;
                                 SortedSet<Date> keys = new TreeSet<>(data.keySet());

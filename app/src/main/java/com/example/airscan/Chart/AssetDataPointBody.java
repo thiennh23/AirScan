@@ -2,7 +2,7 @@ package com.example.airscan.Chart;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AssetDataPointRequestBody {
+public class AssetDataPointBody {
     @SerializedName("fromTimestamp")
     private long fromTimestamp;
     @SerializedName("toTimestamp")
@@ -12,7 +12,7 @@ public class AssetDataPointRequestBody {
     @SerializedName("amountOfPoints")
     private int amountOfPoints;
 
-    public AssetDataPointRequestBody(
+    public AssetDataPointBody(
             long fromTimestamp,
             long toTimestamp,
             String type, int amountOfPoints

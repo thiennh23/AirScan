@@ -1,7 +1,7 @@
 package com.example.airscan.Interfaces;
 
 import com.example.airscan.Chart.AssetDataPoint;
-import com.example.airscan.Chart.AssetDataPointRequestBody;
+import com.example.airscan.Chart.AssetDataPointBody;
 import com.example.airscan.Models.Asset;
 import com.example.airscan.Models.Map;
 import com.example.airscan.Models.Token;
@@ -15,7 +15,6 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -53,5 +52,5 @@ public interface APIInterface {
     Call<List<AssetDataPoint>> getListDataPoint(
             @Path("assetID") String assetID,
             @Path("assetAttribute") String assetAttribute,
-            @Body AssetDataPointRequestBody body);
+            @Body AssetDataPointBody body);
 }

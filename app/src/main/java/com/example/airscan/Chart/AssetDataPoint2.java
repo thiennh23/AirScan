@@ -11,21 +11,21 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import com.example.airscan.*;
+
 import com.example.airscan.Interfaces.APIInterface;
 import com.example.airscan.Others.APIClient;
 
-public class AssetDataPointRepository {
+public class AssetDataPoint2 {
     private APIInterface apiInterface;
 
-    public AssetDataPointRepository(Context context) {
+    public AssetDataPoint2(Context context) {
         this.apiInterface = APIClient.getClient().create(APIInterface.class);
     }
 
     public LiveData<List<AssetDataPoint>> getListDataPoint(
             String assetID,
             String assetAttribute,
-            AssetDataPointRequestBody body
+            AssetDataPointBody body
     ) {
         MutableLiveData<List<AssetDataPoint>> data = new MutableLiveData<>();
         Call<List<AssetDataPoint>> call = apiInterface.getListDataPoint(assetID, assetAttribute, body);
